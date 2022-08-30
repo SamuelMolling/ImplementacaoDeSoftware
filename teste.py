@@ -4,7 +4,7 @@ from tkcalendar import DateEntry
 import tkinter as tk
 from tkinter import messagebox
 
-##Utilizando classe
+#Utilizando classe
 class initialWindow:
  def __init__(self):
   # Criamos a janela principal
@@ -151,4 +151,6 @@ button = tk.Button(app,
               text="Quit",
               command=quit)
 button.pack()
+
+# Start the mainloop
 app.mainloop()

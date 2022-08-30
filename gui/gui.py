@@ -36,5 +36,4 @@ lbl_nome = Label(window, text='Birthday: ').grid( \
 window=DateEntry(window,selectmode='day')
 window.grid(row=4,column=1,padx=15)
 
-
 window.mainloop()
