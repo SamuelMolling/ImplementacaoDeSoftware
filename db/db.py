@@ -1,7 +1,7 @@
 import sqlalchemy as db
 import sqlalchemy.orm as orm
 
-engine = db.create_engine('sqlite:///bank.db')
+engine = db.create_engine('sqlite:///bank.db', echo=True)
 conn = engine.connect()
 Base = orm.declarative_base()
 
@@ -37,9 +37,20 @@ class Movimentation(Base):
   date = db.Column(db.DateTime, nullable=False)
   value = db.Column(db.Float, nullable=False)
 
-
 # Movimentation type table 
 class MovimentationType(Base):
   __tablename__ = 'movimentation_type'
   id = db.Column(db.Integer, primary_key=True)
   type = db.Column(db.String(50), nullable=False)
+
+# Relationships between tables
+## Client 1/1 BankAccount
+Client.bank_accounts = orm.relationship('BankAccount', back_populates='client')
+## BankAccount n/1 AccountType
+BankAccount.account_types = orm.relationship('AccountType', back_populates='bank_accounts')
+## BankAccount 1/n Movimentation
+BankAccount.movimentations = orm.relationship('Movimentation', back_populates='account')
+## Movimentation n/1 MovimentationType
+Movimentation.movimentation_types = orm.relationship('MovimentationType', back_populates='movimentations')
+
+Base.metadata.create_all(engine)
