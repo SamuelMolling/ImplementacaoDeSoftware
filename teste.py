@@ -2,7 +2,29 @@ from tkinter import *
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry
 import tkinter as tk
+from tkinter import messagebox
 
+##Utilizando classe
+class initialWindow:
+ def __init__(self):
+  # Criamos a janela principal
+  self.principalWindow = Tk()
+  
+  # Criando o botão
+  self.botao = Button(self.principalWindow, text='Clique aqui', command=self.hello_world)
+  
+  # Empacotando o botão na janela principal
+  self.botao.pack()
+  
+  # Rodando
+  mainloop()
+
+  
+ def hello_world(self):
+  messagebox.showinfo('Adoro a Apostila Python Progressivo!')
+gui = initialWindow()
+
+###############################################################################
 def createNewCostumer():
     newWindow = tk.Toplevel(app)
 
