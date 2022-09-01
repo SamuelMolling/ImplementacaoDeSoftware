@@ -36,4 +36,8 @@ lbl_nome = Label(window, text='Birthday: ').grid( \
 window=DateEntry(window,selectmode='day')
 window.grid(row=4,column=1,padx=15)
 
+button = Label(window,  text="Name").pack(side = LEFT, fill=X)
+label = Entry(window)
+label.pack()
+
 window.mainloop()
