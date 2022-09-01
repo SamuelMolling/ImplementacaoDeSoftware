@@ -1,9 +1,17 @@
-from msilib.schema import ComboBox
 from tkinter import *
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry
 import tkinter as tk
 from tkinter import messagebox
+
+def getCPF(cpf):
+    pass
+
+def updateBalance(action, value):
+    pass
+
+def closeWindow(window):
+    window.destroy()
 
 class initialWindow:
  def __init__(self):
@@ -37,15 +45,13 @@ class initialWindow:
   self.button.pack()
 
   # Quit
-  self.button = Button(self.principalWindow, text="Quit", command=quit)
+  self.button = Button(self.principalWindow, text="Quit", command=closeWindow(self.principalWindow))
   self.button.pack()
   
   # Running
   mainloop()
-  gui = initialWindow()
 
-#  def hello_world(self):
-#   messagebox.showinfo('Adoro a Apostila Python Progressivo!')
+gui = initialWindow()
 ###############################################################################
 class createCostumerWindow:
  def __init__(self):
@@ -75,12 +81,42 @@ class createCostumerWindow:
   self.label = DateEntry(self.createCostumerWindow,selectmode='day')
   self.button.pack()
 
-  # Rodando
+  # Running
   mainloop()
 
- def VerifyCPF(self):
-  messagebox.showinfo('VALIDAR CPF AQUI')
+gui = createCostumerWindow()
+###############################################################################
+###############################################################################
+class createNewAccountWindow:
+ def __init__(self):
+  # Create the secondary window
+  self.createCostumerWindow = Tk()
+  self.createCostumerWindow.title("Create New Account for a Costumer")
+  self.createCostumerWindow.geometry('300x300')
+  
+  # CPF
+  self.button = Label(self.createCostumerWindow, text="Enter with your CPF").pack(side = LEFT)
+  self.label = Entry(self.createCostumerWindow) 
+  self.button.pack()
 
+  # Account type
+  self.button = Label(self.createCostumerWindow, text="Select account type").pack(side = LEFT)
+  self.label = ComboBox(self.createCostumerWindow)
+  self.label['values'] = ('1 - Corrente','2 - Poupança','3 - Investimento')
+  self.button.pack()
+
+  # CPF
+  self.button = Label(self.createCostumerWindow, text="Enter with your balance").pack(side = LEFT)
+  self.label = Entry(self.createCostumerWindow) 
+  self.button.pack()
+
+  # Button for save
+  self.button = Button(self.createCostumerWindow, text="Save", command=self.VerifyCPF)
+  self.button.pack()
+
+  # Rodando
+  mainloop()
+  
 gui = createCostumerWindow()
 ###############################################################################
 ###############################################################################
@@ -108,49 +144,9 @@ class createNewAccountWindow:
 
   # Rodando
   mainloop()
-
- def VerifyCPF(self):
-  messagebox.showinfo('VALIDAR CPF AQUI')
-  
-gui = createCostumerWindow()
-###############################################################################
-###############################################################################
-class createNewAccountWindow:
- def __init__(self):
-  # Create the secondary window
-  self.createCostumerWindow = Tk()
-  self.createCostumerWindow.title("Create New Account for a Costumer")
-  self.createCostumerWindow.geometry('300x300')
-  
-  # CPF
-  self.button = Label(self.createCostumerWindow, text="Enter with your CPF").pack(side = LEFT)
-  self.label = Entry(self.createCostumerWindow) 
-  self.button.pack()
-
-  # Account type
-  self.button = Label(self.createCostumerWindow, text="Select account type").pack(side = LEFT)
-  self.label = ComboBox(self.createCostumerWindow)
-  self.label['values'] = ('1 - Corrente','2 - Poupança','3 - Investimento')
-  self.button.pack()
-
-  # Button for save
-  self.button = Button(self.createCostumerWindow, text="Save", command=self.VerifyCPF)
-  self.button.pack()
-
-  # Rodando
-  mainloop()
-
- def VerifyCPF(self):
-  messagebox.showinfo('VALIDAR CPF AQUI')
 
   def insertNewCostumer(self):
     messagebox.showinfo('INSERIR NOVO CLIENTE AQUI')
-
-  def insertInitialBalance(self):
-    messagebox.showinfo('INSERIR SALDO INICIAL AQUI')
-  
-  def quit(self):
-    self.principalWindow.destroy()
 
 gui = createCostumerWindow()
 ###############################################################################
@@ -179,15 +175,6 @@ class makeDepositWindow:
   # Rodando
   mainloop()
 
- def VerifyCPF(self):
-  messagebox.showinfo('VALIDAR CPF AQUI')
-
-  def insertBalance(self):
-    messagebox.showinfo('INSERIR SALDO INICIAL AQUI')
-  
-  def quit(self):
-    self.principalWindow.destroy()
-
 gui = createCostumerWindow()
 ###############################################################################
 ###############################################################################
@@ -215,50 +202,65 @@ class makeWithdrawalWindow:
   # Rodando
   mainloop()
 
- def VerifyCPF(self):
-  messagebox.showinfo('VALIDAR CPF AQUI')
-
-  def insertBalance(self):
-    messagebox.showinfo('INSERIR SALDO INICIAL AQUI')
-  
-  def quit(self):
-    self.principalWindow.destroy()
-
 gui = createCostumerWindow()
 ###############################################################################
+###############################################################################
+class applyInterestWindow:
+ def __init__(self):
+  # Create the secondary window
+  self.createCostumerWindow = Tk()
+  self.createCostumerWindow.title("Apply Interest")
+  self.createCostumerWindow.geometry('300x300')
+  
+  # CPF
+  self.button = Label(self.createCostumerWindow, text="Enter with your CPF").pack(side = LEFT)
+  self.label = Entry(self.createCostumerWindow) 
+  self.button.pack()
 
-def makeWithdrawal():
-    newWindow = tk.Toplevel(app)
-    label = tk.Label(newWindow, text = "makeDeposit")
-    button = tk.Button(newWindow, text = "makeDeposit")
+  # Balance
+  self.button = Label(self.createCostumerWindow, text="Insert a value for the interest").pack(side = LEFT)
+  self.label = Entry(self.createCostumerWindow) 
+  self.button.pack()
 
-    label.pack()
-    button.pack()    
+  # Button for save
+  self.button = Button(self.createCostumerWindow, text="Save", command=self.VerifyCPF)
+  self.button.pack()
 
-def applyInterest():
-    newWindow = tk.Toplevel(app)
-    label = tk.Label(newWindow, text = "makeDeposit")
-    button = tk.Button(newWindow, text = "makeDeposit")
+  # Rodando
+  mainloop()
 
-    label.pack()
-    button.pack() 
+gui = applyInterestWindow()
+###############################################################################
+###############################################################################
+class Extract:
+ def __init__(self):
+  # Create the secondary window
+  self.createCostumerWindow = Tk()
+  self.createCostumerWindow.title("Extract")
+  self.createCostumerWindow.geometry('300x300')
+  
+  # CPF
+  self.button = Label(self.createCostumerWindow, text="Enter with your CPF").pack(side = LEFT)
+  self.label = Entry(self.createCostumerWindow) 
+  self.button.pack()
 
-def getExtract():
-    newWindow = tk.Toplevel(app)
-    label = tk.Label(newWindow, text = "makeDeposit")
-    button = tk.Button(newWindow, text = "makeDeposit")
+  # Inicial date
+  self.button = Label(self.createCostumerWindow, text="Inicial date").pack(side = LEFT)
+  self.label = DateEntry(self.createCostumerWindow,selectmode='day')
+  self.button.pack()
 
-    label.pack()
-    button.pack() 
+  # Finish date
+  self.button = Label(self.createCostumerWindow, text="Finish date").pack(side = RIGHT)
+  self.label = DateEntry(self.createCostumerWindow,selectmode='day')
+  self.button.pack()
 
-def quit():
-    app.destroy()
+  # Button for search
+  self.button = Button(self.createCostumerWindow, text="Search", command=self.VerifyCPF)
+  self.button.pack()
 
-app = tk.Tk()
-app.title("Simplified Banking System")
-app.geometry('300x300')
+  # Rodando
+  mainloop()
 
-
-
-# Start the mainloop
-app.mainloop()
+gui = applyInterestWindow()
+###############################################################################
+###############################################################################

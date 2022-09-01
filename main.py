@@ -1,5 +1,4 @@
 # main.py
-from db import db
-from gui import gui
-
+from gui import *
+from db import *
 ###IMPLEMENTAR CODIGO AQUI###
