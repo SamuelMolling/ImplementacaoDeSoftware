@@ -2,6 +2,7 @@ from model import *
 
 Session = orm.sessionmaker(bind=engine)
 session = Session()
+engine.echo=True
 
 # Insert
 try:
