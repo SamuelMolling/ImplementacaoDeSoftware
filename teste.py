@@ -4,6 +4,35 @@ from tkcalendar import DateEntry
 import tkinter as tk
 from tkinter import messagebox
 
+ 
+class client:
+    def __init__(self, name, sex, cpf, birthday):
+        self.name = name
+        self.sex = sex
+        self.cpf = cpf
+        self.birthday = birthday
+
+class bankAccount:
+    def __init__(self, accountType, balance):
+        self.cpf = client.cpf
+        self.accountType = accountType
+        self.balance = balance
+
+class accountType:
+    def __init__(self, type):
+        self.type = type
+
+class movimentationType:
+    def __init__(self, type):
+        self.type = type
+
+class movimentation:
+    def __init__(self, cpf, value):
+        self.cpf = cpf
+        self.type = movimentationType.type
+        self.account = bankAccount.cpf
+        self.value = value
+
 def getCPF(cpf):
     pass
 
@@ -67,7 +96,7 @@ class createCostumerWindow:
 
   # Sex
   self.button = Label(self.createCostumerWindow, text="Sex").pack(side = LEFT)
-  self.label = ComboBox(self.createCostumerWindow)
+  self.label = ttk.ComboBox(self.createCostumerWindow)
   self.label['values'] = ('M','F')
   self.button.pack()
 
@@ -101,7 +130,7 @@ class createNewAccountWindow:
 
   # Account type
   self.button = Label(self.createCostumerWindow, text="Select account type").pack(side = LEFT)
-  self.label = ComboBox(self.createCostumerWindow)
+  self.label = ttk.ComboBox(self.createCostumerWindow)
   self.label['values'] = ('1 - Corrente','2 - Poupança','3 - Investimento')
   self.button.pack()
 
@@ -134,7 +163,7 @@ class createNewAccountWindow:
 
   # Account type
   self.button = Label(self.createCostumerWindow, text="Select account type").pack(side = LEFT)
-  self.label = ComboBox(self.createCostumerWindow)
+  self.label = ttk.ComboBox(self.createCostumerWindow)
   self.label['values'] = ('1 - Corrente','2 - Poupança','3 - Investimento')
   self.button.pack()
 
