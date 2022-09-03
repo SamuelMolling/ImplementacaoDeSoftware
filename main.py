@@ -1,6 +1,7 @@
-# main.py
-from db import model
-from db import AccountType
-from db import movimentationType
-from gui import *
-###IMPLEMENTAR CODIGO AQUI###
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+def main():
+    print('Hello World!')
+
+if __name__ == "__main__":
+    main()
