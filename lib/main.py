@@ -1,37 +1,52 @@
- 
-class client:
-    def __init__(self, name, sex, cpf, birthday):
-        self.name = name
-        self.sex = sex
-        self.cpf = cpf
-        self.birthday = birthday
+import tkinter as tk
 
-class bankAccount:
-    def __init__(self, accountType, balance):
-        self.cpf = client.cpf
-        self.accountType = accountType
-        self.balance = balance
+class app(tk):
+    def __init__(self):
+        super().__init__()
 
-class accountType:
-    def __init__(self, type):
-        self.type = type
+    Cliente = {
+        'id': tk.IntVar(),
+        'name': tk.StringVar(),
+        'sex': tk.StringVar(),
+        'cpf': tk.StringVar(),
+        'birthday': tk.StringVar()
+    }
 
-class movimentationType:
-    def __init__(self, type):
-        self.type = type
+    bankAccount = {
+        'id': tk.IntVar(),
+        'balance': tk.IntVar(),
+        'cpf': tk.StringVar(),
+        'accountType': tk.StringVar()
+    }
 
-class movimentation:
-    def __init__(self, cpf, value):
-        self.cpf = cpf
-        self.type = movimentationType.type
-        self.account = bankAccount.cpf
-        self.value = value
+    accountType = {
+        'id': tk.IntVar(),
+        'type': tk.StringVar()
+    }
 
-def getCPF(cpf):
-    pass
+    movimentationType = {
+        'id': tk.IntVar(),
+        'type': tk.StringVar()
+    }
 
-def updateBalance(action, value):
-    pass
+    movimentation = {
+        'id': tk.IntVar(),
+        'value': tk.IntVar(),
+        'account': tk.IntVar(),
+        'movimentationType': tk.IntVar()
+    }
 
-def closeWindow(window):
-    window.destroy()
+    def getCPF(self):
+        pass
+
+    def updateBalance(action, value):
+        pass
+
+    def validateToSave(cpf):
+        if getCPF(cpf): # Check if the CPF exists
+            commit()
+        else:
+            rollback()
+
+    def closeWindow(self):
+        self.destroy()
