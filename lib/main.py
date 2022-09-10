@@ -36,10 +36,13 @@ class app(tk):
         'movimentationType': tk.IntVar()
     }
 
-    
+
 
     def closeWindow(self):
         self.destroy()
 
     def VerifyCPF(self):
+        pass
+
+    def saveInformations():
         pass
