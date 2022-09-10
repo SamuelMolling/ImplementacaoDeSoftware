@@ -32,6 +32,10 @@ class createCostumerWindow(app):
   self.label = DateEntry(self,selectmode='day')
   self.button.pack()
 
+  # Button for save
+  self.button = Button(self, text="Save", command=VerifyCPF)
+  self.button.pack()
+
   # Quit
   self.button = Button(self, text="Quit", command=self.destroy())
   self.button.pack()
