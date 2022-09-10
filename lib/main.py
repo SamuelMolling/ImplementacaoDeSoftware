@@ -1,6 +1,6 @@
 import tkinter as tk
 
-class app(tk):
+class app(tk.Tk):
     def __init__(self):
         super().__init__()
 
@@ -45,5 +45,4 @@ class app(tk):
         pass
 
     def saveInformations():
-        
         pass

@@ -33,7 +33,7 @@ class createCostumerWindow(app):
   self.button.pack()
 
   # Button for save
-  self.button = Button(self, text="Save", command=VerifyCPF)
+  self.button = Button(self, text="Save", command=app.saveInformations("costumer"))
   self.button.pack()
 
   # Quit
