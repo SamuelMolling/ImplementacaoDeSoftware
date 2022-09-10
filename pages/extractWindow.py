@@ -1,7 +1,8 @@
 from tkinter import *
 from tkcalendar import DateEntry
+from lib.main import app
 
-class extractWindow(Tk):
+class extractWindow(app):
  def __init__(self):
   super().__init__()
   # Create the secondary window
@@ -25,4 +26,8 @@ class extractWindow(Tk):
 
   # Button for search
   self.button = Button(self, text="Search", command=self.VerifyCPF)
+  self.button.pack()
+
+  # Quit
+  self.button = Button(self, text="Quit", command=self.destroy())
   self.button.pack()

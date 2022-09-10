@@ -36,17 +36,10 @@ class app(tk):
         'movimentationType': tk.IntVar()
     }
 
-    def getCPF(self):
-        pass
-
-    def updateBalance(action, value):
-        pass
-
-    def validateToSave(cpf):
-        if getCPF(cpf): # Check if the CPF exists
-            commit()
-        else:
-            rollback()
+    
 
     def closeWindow(self):
         self.destroy()
+
+    def VerifyCPF(self):
+        pass

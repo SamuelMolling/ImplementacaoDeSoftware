@@ -1,7 +1,9 @@
 from tkinter import *
 import tkinter.ttk as ttk
 
-class createNewAccountWindow(Tk):
+from lib.main import app
+
+class createNewAccountWindow(app):
  def __init__(self):
   super().__init__()
   # Create the secondary window
@@ -26,4 +28,8 @@ class createNewAccountWindow(Tk):
 
   # Button for save
   self.button = Button(self, text="Save", command=validateToSave)
+  self.button.pack()
+
+  # Quit
+  self.button = Button(self, text="Quit", command=self.destroy())
   self.button.pack()

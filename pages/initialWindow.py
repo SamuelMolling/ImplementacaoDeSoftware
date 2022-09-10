@@ -1,6 +1,7 @@
 from tkinter import *
+from lib.main import app
 
-class initialWindow(Tk):
+class initialWindow(app):
  def __init__(self):
   super().__init__()
   # Create the principal window
@@ -8,7 +9,7 @@ class initialWindow(Tk):
   self.geometry('300x300')
 
   # Create new costumer in the banking system
-  self.button = Button(self, text="Create new costumer", command=createCostumerWindow)
+  self.button = Button(self, text="Create new costumer", command=lambda: createCostumerWindow)
   self.button.pack()
 
   # Create new account for costumer
@@ -32,5 +33,5 @@ class initialWindow(Tk):
   self.button.pack()
 
   # Quit
-  self.button = Button(self, text="Quit", command=closeWindow)
+  self.button = Button(self, text="Quit", command=self.destroy())
   self.button.pack()

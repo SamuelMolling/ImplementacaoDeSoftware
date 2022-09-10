@@ -1,6 +1,8 @@
 from tkinter import *
+from lib.main import app
 
-class makeDepositWindow(Tk):
+
+class makeDepositWindow(app):
  def __init__(self):
   super().__init__()
   # Create the secondary window
@@ -19,4 +21,8 @@ class makeDepositWindow(Tk):
 
   # Button for save
   self.button = Button(self, text="Save", command=self.VerifyCPF)
+  self.button.pack()
+    
+  # Quit
+  self.button = Button(self, text="Quit", command=self.destroy())
   self.button.pack()

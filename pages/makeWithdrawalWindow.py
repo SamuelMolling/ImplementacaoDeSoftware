@@ -1,6 +1,7 @@
 from tkinter import *
+from lib.main import app
 
-class makeWithdrawalWindow(Tk):
+class makeWithdrawalWindow(app):
  def __init__(self):
   super().__init__()
   # Create the secondary window
@@ -19,4 +20,8 @@ class makeWithdrawalWindow(Tk):
 
   # Button for save
   self.button = Button(self, text="Save", command=self.VerifyCPF)
+  self.button.pack()
+
+  # Quit
+  self.button = Button(self, text="Quit", command=self.destroy())
   self.button.pack()

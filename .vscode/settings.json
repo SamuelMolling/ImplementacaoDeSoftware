@@ -1,5 +1,7 @@
 {
     "python.analysis.extraPaths": [
-        "./db"
+        "./db",
+        "./pages",
+        "./lib"
     ]
 }
