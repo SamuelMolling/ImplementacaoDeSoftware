@@ -1,40 +1,43 @@
-from tkinter import *
+import tkinter as tk
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry
 
 
-class createCostumerWindow(Tk):
+class createCostumerWindow(tk.Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window
   self.title("Create New Costumer")
   self.geometry('300x300')
   
+  def destroy(self):
+    self.destroy()
+    
   # Name
-  self.button = Label(self, text="Name").pack(side = LEFT)
-  self.label = Entry(self) 
+  self.button = tk.Label(self, text="Name").pack(side = tk.LEFT)
+  self.label = tk.Entry(self) 
   self.button.pack()
 
   # Sex
-  self.button = Label(self, text="Sex").pack(side = LEFT)
+  self.button = tk.Label(self, text="Sex").pack(side = tk.LEFT)
   self.label = ttk.ComboBox(self)
   self.label['values'] = ('M','F')
   self.button.pack()
 
   # CPF
-  self.button = Label(self, text="CPF").pack(side = LEFT)
-  self.label = Entry(self) 
+  self.button = tk.Label(self, text="CPF").pack(side = tk.LEFT)
+  self.label = tk.Entry(self) 
   self.button.pack()
 
   # Birthday
-  self.button = Label(self, text="Birthday").pack(side = LEFT)
+  self.button = tk.Label(self, text="Birthday").pack(side = tk.LEFT)
   self.label = DateEntry(self,selectmode='day')
   self.button.pack()
 
   # Button for save
-  self.button = Button(self, text="Save", command=app.saveInformations("costumer"))
+  self.button = tk.Button(self, text="Save", command=app.saveInformations("costumer"))
   self.button.pack()
 
   # Quit
-  self.button = Button(self, text="Quit", command=self.destroy())
+  self.button = tk.Button(self, text="Quit", command=destroy)
   self.button.pack()
