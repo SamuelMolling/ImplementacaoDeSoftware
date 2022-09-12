@@ -1,4 +1,4 @@
-from model import *
+from db.model import *
 
 Session = orm.sessionmaker(bind=engine)
 session = Session()
@@ -6,7 +6,7 @@ engine.echo=True
 
 # Validate if the Movimentation Type is already registered
 rows = session.query(MovimentationType).all()
-if rows > 3:
+if len(rows) < 3:
 # Insert
     try:
 

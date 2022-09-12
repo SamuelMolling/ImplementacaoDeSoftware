@@ -1,8 +1,7 @@
 from tkinter import *
-from lib.main import app
 
 
-class makeDepositWindow(app):
+class makeDepositWindow(Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window

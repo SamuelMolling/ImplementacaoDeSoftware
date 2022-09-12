@@ -1,9 +1,8 @@
 from tkinter import *
 import tkinter.ttk as ttk
 
-from lib.main import app
 
-class createNewAccountWindow(app):
+class createNewAccountWindow(Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window

@@ -1,8 +1,7 @@
 from tkinter import *
 from tkcalendar import DateEntry
-from lib.main import app
 
-class extractWindow(app):
+class extractWindow(Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window

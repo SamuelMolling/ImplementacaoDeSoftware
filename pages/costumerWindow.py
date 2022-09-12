@@ -1,10 +1,9 @@
 from tkinter import *
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry
-from lib.main import app
 
 
-class createCostumerWindow(app):
+class createCostumerWindow(Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window

@@ -1,7 +1,6 @@
 from tkinter import *
-from lib.main import app
 
-class applyInterestWindow(app):
+class applyInterestWindow(Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window
