@@ -1,27 +1,30 @@
-from tkinter import *
+import tkinter as tk
 
 
-class makeDepositWindow(Tk):
+class makeDepositWindow(tk.Tk):
  def __init__(self):
   super().__init__()
   # Create the secondary window
   self.title("Make a deposit")
   self.geometry('300x300')
   
+  def destroy(self):
+    self.destroy()
+
   # CPF
-  self.button = Label(self, text="Enter with your CPF").pack(side = LEFT)
-  self.label = Entry(self) 
+  self.button = tk.Label(self, text="Enter with your CPF").pack(side = tk.LEFT)
+  self.label = tk.Entry(self) 
   self.button.pack()
 
   # Balance
-  self.button = Label(self, text="Insert a value for the deposit").pack(side = LEFT)
-  self.label = Entry(self) 
+  self.button = tk.Label(self, text="Insert a value for the deposit").pack(side = tk.LEFT)
+  self.label = tk.Entry(self) 
   self.button.pack()
 
   # Button for save
-  self.button = Button(self, text="Save", command=self.VerifyCPF)
+  self.button = tk.Button(self, text="Save", command=self.VerifyCPF)
   self.button.pack()
     
   # Quit
-  self.button = Button(self, text="Quit", command=self.destroy())
+  self.button = tk.Button(self, text="Quit", command=destroy)
   self.button.pack()
