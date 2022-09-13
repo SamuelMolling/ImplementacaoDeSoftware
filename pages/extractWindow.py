@@ -12,22 +12,25 @@ class extractWindow(tk.Tk):
     self.destroy()
 
   # CPF
-  self.button = tk.Label(self, text="Enter with your CPF").pack(side = tk.LEFT)
-  self.label = tk.Entry(self) 
-  self.button.pack()
+  self.label = tk.Label(self, text="Enter with your CPF")
+  self.entry = tk.Entry(self) 
+  self.label.pack()
+  self.entry.pack()
 
   # Inicial date
-  self.button = tk.Label(self, text="Inicial date").pack(side = tk.LEFT)
-  self.label = DateEntry(self,selectmode='day')
-  self.button.pack()
+  self.label = tk.Label(self, text="Inicial date")
+  self.entry = DateEntry(self,selectmode='day')
+  self.label.pack()
+  self.entry.pack()
 
   # Finish date
-  self.button = tk.Label(self, text="Finish date").pack(side = tk.RIGHT)
-  self.label = DateEntry(self,selectmode='day')
-  self.button.pack()
+  self.label = tk.Label(self, text="Finish date")
+  self.entry = DateEntry(self,selectmode='day')
+  self.label.pack()
+  self.entry.pack()
 
   # Button for search
-  self.button = tk.Button(self, text="Search", command=self.VerifyCPF)
+  self.button = tk.Button(self, text="Search", command=destroy)
   self.button.pack()
 
   # Quit

@@ -14,28 +14,32 @@ class createCostumerWindow(tk.Tk):
     self.destroy()
     
   # Name
-  self.button = tk.Label(self, text="Name").pack(side = tk.LEFT)
-  self.label = tk.Entry(self) 
-  self.button.pack()
+  self.label = tk.Label(self, text="Name")
+  self.entry = tk.Entry(self) 
+  self.label.pack()
+  self.entry.pack()
 
   # Sex
-  self.button = tk.Label(self, text="Sex").pack(side = tk.LEFT)
-  self.label = ttk.ComboBox(self)
-  self.label['values'] = ('M','F')
-  self.button.pack()
+  self.label = tk.Label(self, text="Sex")
+  self.entry = ttk.Combobox(self)
+  self.entry['values'] = ('M','F')
+  self.label.pack()
+  self.entry.pack()
 
   # CPF
-  self.button = tk.Label(self, text="CPF").pack(side = tk.LEFT)
-  self.label = tk.Entry(self) 
-  self.button.pack()
+  self.label = tk.Label(self, text="CPF")
+  self.entry = tk.Entry(self) 
+  self.label.pack()
+  self.entry.pack()
 
   # Birthday
-  self.button = tk.Label(self, text="Birthday").pack(side = tk.LEFT)
-  self.label = DateEntry(self,selectmode='day')
-  self.button.pack()
+  self.label = tk.Label(self, text="Birthday")
+  self.entry = DateEntry(self,selectmode='day')
+  self.label.pack()
+  self.entry.pack()
 
   # Button for save
-  self.button = tk.Button(self, text="Save", command=app.saveInformations("costumer"))
+  self.button = tk.Button(self, text="Save", command=destroy)
   self.button.pack()
 
   # Quit
