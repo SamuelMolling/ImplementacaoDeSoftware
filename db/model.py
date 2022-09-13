@@ -46,11 +46,15 @@ class MovimentationType(Base):
 # Relationships between tables
 ## Client 1/1 BankAccount
 Client.bank_accounts = orm.relationship('BankAccount', back_populates='client')
+BankAccount.client = orm.relationship('Client', back_populates='bank_accounts')
 ## BankAccount n/1 AccountType
 BankAccount.account_types = orm.relationship('AccountType', back_populates='bank_accounts')
+AccountType.bank_accounts = orm.relationship('BankAccount', back_populates='account_types')
 ## BankAccount 1/n Movimentation
-BankAccount.movimentations = orm.relationship('Movimentation', back_populates='account')
+BankAccount.movimentations = orm.relationship('AccountType', back_populates='movimentations', overlaps="account_types,bank_accounts")
+AccountType.movimentations = orm.relationship('BankAccount', back_populates='movimentations', overlaps="account_types,bank_accounts")
 ## Movimentation n/1 MovimentationType
-Movimentation.movimentation_types = orm.relationship('MovimentationType', back_populates='movimentations')
+Movimentation.types = orm.relationship('MovimentationType', back_populates='movimentations')
+MovimentationType.movimentations = orm.relationship('Movimentation', back_populates='types')
 
 Base.metadata.create_all(engine)
