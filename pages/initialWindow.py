@@ -14,32 +14,32 @@ class initialWindow(tk.Tk):
   self.title("Simplified Banking System")
   self.geometry('300x300')
 
-  def initCostumerWindow(self):
+  def initCostumerWindow():
    costumerWindow = createCostumerWindow()
    costumerWindow.mainloop()
 
-  def initNewAccountWindow(self):
+  def initNewAccountWindow():
    newAccountWindow = createNewAccountWindow()
    newAccountWindow.mainloop()
 
-  def initMakeDepositWindow(self):
+  def initMakeDepositWindow():
     makeDepositWindow
     DepositWindow = makeDepositWindow()
     DepositWindow.mainloop()
 
-  def initMakeWithdrawalWindow(self):
+  def initMakeWithdrawalWindow():
     WithdrawalWindow = makeWithdrawalWindow()
     WithdrawalWindow.mainloop()
   
-  def initApplyInterestWindow(self):
+  def initApplyInterestWindow():
     InterestWindow = applyInterestWindow()
     InterestWindow.mainloop()
   
-  def initExtractWindow(self):
+  def initExtractWindow():
     extract = extractWindow()
     extract.mainloop()
 
-  def destroy(self):
+  def destroy():
     self.destroy()
 
   # Create new costumer in the banking system
