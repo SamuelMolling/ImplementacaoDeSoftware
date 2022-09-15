@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+from lib.db_helper import *
 
 Cliente = {
     'id': tk.IntVar(),
@@ -32,15 +34,36 @@ movimentation = {
     'movimentationType': tk.IntVar()
 }
 
-def closeWindow(self):
-    self.destroy()
+def showMessage(text, type):
+    types = {
+        'error': messagebox.showerror,
+        'info': messagebox.showinfo,
+        'warning': messagebox.showwarning
+    }
+    types[type](text)
 
-def VerifyCPF(self):
-    pass
+def VerifyCPF(cpf):
+    if getCPF(Cliente[cpf].get()):
+        return True
 
-def saveInformations():
-    pass
+def newClient(name, sex, cpf, birthday):
+    if VerifyCPF(cpf):
+        showMessage('CPF already exists', 'error')
+    else:
+        insertClient(name, sex, cpf, birthday)
+        showMessage('Client created', 'info')
 
-def showMessage():
-    pass
-
+def saveInformations(action):    
+    match action:
+        case 1:
+            insertClient(Cliente['name'].get) ##PEGAR INFO DO FORM
+        case 2:
+            insertBankAccount(bankAccount['balance'].get, bankAccount['cpf'].get, bankAccount['accountType'].get)
+        case 3:
+            insertMovimentation(movimentation['value'].get, movimentation['account'].get, movimentation['movimentationType'].get)
+        case 4:
+            ValidateAction(movimentation['movimentationType'].get, movimentation['account'].get, movimentation['value'].get)
+        case 5:
+            getExtrato(movimentation['account'].get)
+        case 6:
+            validateToSave(movimentation['account'].get)

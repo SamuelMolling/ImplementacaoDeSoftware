@@ -7,7 +7,7 @@ class applyInterestWindow(tk.Tk):
   self.title("Apply Interest")
   self.geometry('300x300')
   
-  def destroy(self):
+  def destroy():
     self.destroy()
 
   # CPF

@@ -8,7 +8,7 @@ class extractWindow(tk.Tk):
   self.title("Extract")
   self.geometry('300x300')
   
-  def destroy(self):
+  def destroy():
     self.destroy()
 
   # CPF

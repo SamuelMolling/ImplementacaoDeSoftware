@@ -8,7 +8,7 @@ class makeWithdrawalWindow(tk.Tk):
   self.title("Make a withdrawal")
   self.geometry('300x300')
 
-  def destroy(self):
+  def destroy():
     self.destroy()
 
   # CPF

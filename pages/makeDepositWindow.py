@@ -8,7 +8,7 @@ class makeDepositWindow(tk.Tk):
   self.title("Make a deposit")
   self.geometry('300x300')
   
-  def destroy(self):
+  def destroy():
     self.destroy()
 
   # CPF

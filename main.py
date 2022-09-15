@@ -8,4 +8,3 @@ from pages.initialWindow import *
 if __name__ == "__main__":
     app = initialWindow()
     app.mainloop()
-    ##Pesquisar init.py para criar o banco de dados

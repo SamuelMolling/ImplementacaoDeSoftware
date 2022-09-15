@@ -9,7 +9,7 @@ class createNewAccountWindow(tk.Tk):
   self.title("Create New Account for a Costumer")
   self.geometry('300x300')
 
-  def destroy(self):
+  def destroy():
     self.destroy()
 
   # CPF
