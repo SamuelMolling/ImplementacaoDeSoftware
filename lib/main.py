@@ -2,37 +2,37 @@ import tkinter as tk
 from tkinter import messagebox
 from lib.db_helper import *
 
-Cliente = {
-    'id': tk.IntVar(),
-    'name': tk.StringVar(),
-    'sex': tk.StringVar(),
-    'cpf': tk.StringVar(),
-    'birthday': tk.StringVar()
-}
+# Cliente = {
+#     'id': tk.IntVar(),
+#     'name': tk.StringVar(),
+#     'sex': tk.StringVar(),
+#     'cpf': tk.StringVar(),
+#     'birthday': tk.StringVar()
+# }
 
-bankAccount = {
-    'id': tk.IntVar(),
-    'balance': tk.IntVar(),
-    'cpf': tk.StringVar(),
-    'accountType': tk.StringVar()
-}
+# bankAccount = {
+#     'id': tk.IntVar(),
+#     'balance': tk.IntVar(),
+#     'cpf': tk.StringVar(),
+#     'accountType': tk.StringVar()
+# }
 
-accountType = {
-    'id': tk.IntVar(),
-    'type': tk.StringVar()
-}
+# accountType = {
+#     'id': tk.IntVar(),
+#     'type': tk.StringVar()
+# }
 
-movimentationType = {
-    'id': tk.IntVar(),
-    'type': tk.StringVar()
-}
+# movimentationType = {
+#     'id': tk.IntVar(),
+#     'type': tk.StringVar()
+# }
 
-movimentation = {
-    'id': tk.IntVar(),
-    'value': tk.IntVar(),
-    'account': tk.IntVar(),
-    'movimentationType': tk.IntVar()
-}
+# movimentation = {
+#     'id': tk.IntVar(),
+#     'value': tk.IntVar(),
+#     'account': tk.IntVar(),
+#     'movimentationType': tk.IntVar()
+# }
 
 def showMessage(text, type):
     types = {
@@ -47,16 +47,16 @@ def VerifyCPF(cpf):
         return True
 
 def newClient(name, sex, cpf, birthday):
-    if VerifyCPF(cpf):
-        showMessage('CPF already exists', 'error')
-    else:
-        insertClient(name, sex, cpf, birthday)
-        showMessage('Client created', 'info')
+    # if VerifyCPF(cpf):
+    #     showMessage('CPF already exists', 'error')
+    # else:
+
+    print(name)
+    insertClient(name, sex, cpf, str(birthday))
+    showMessage('Client created', 'info')
 
 def saveInformations(action):    
     match action:
-        case 1:
-            insertClient(Cliente['name'].get) ##PEGAR INFO DO FORM
         case 2:
             insertBankAccount(bankAccount['balance'].get, bankAccount['cpf'].get, bankAccount['accountType'].get)
         case 3:

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class applyInterestWindow(tk.Tk):
  def __init__(self):
@@ -8,7 +9,9 @@ class applyInterestWindow(tk.Tk):
   self.geometry('300x300')
   
   def destroy():
-    self.destroy()
+    op = messagebox.askyesno("Exit","Do you want to exit?")
+    if op>0:
+        self.destroy()
 
   # CPF
   self.label = tk.Label(self, text="Enter with your CPF")

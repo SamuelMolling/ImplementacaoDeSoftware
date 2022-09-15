@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from pages.applyInterestWindow import *
 from pages.costumerWindow import *
 from pages.extractWindow import *
@@ -40,7 +41,9 @@ class initialWindow(tk.Tk):
     extract.mainloop()
 
   def destroy():
-    self.destroy()
+    op = messagebox.askyesno("Exit","Do you want to exit?")
+    if op>0:
+        self.destroy()
 
   # Create new costumer in the banking system
   self.button = tk.Button(self, text="Create new costumer", command=initCostumerWindow)
