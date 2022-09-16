@@ -33,7 +33,7 @@ def insertClient(name, sex, cpf, birthday):
                 name=name, 
                 sex=sex,
                 cpf=cpf,
-                birthday = birthday
+                birthday=birthday
                 )
         ]
 

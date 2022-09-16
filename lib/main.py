@@ -1,14 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from lib.db_helper import *
-
-# Cliente = {
-#     'id': tk.IntVar(),
-#     'name': tk.StringVar(),
-#     'sex': tk.StringVar(),
-#     'cpf': tk.StringVar(),
-#     'birthday': tk.StringVar()
-# }
+from dateutil import parser
 
 # bankAccount = {
 #     'id': tk.IntVar(),
@@ -40,20 +33,30 @@ def showMessage(text, type):
         'info': messagebox.showinfo,
         'warning': messagebox.showwarning
     }
-    types[type](text)
+    types[type](type,text)
+
+def checkNumber(cpf):
+    return bool(cpf.isdigit())
 
 def VerifyCPF(cpf):
-    if getCPF(Cliente[cpf].get()):
+    if getCPF(cpf):
         return True
 
-def newClient(name, sex, cpf, birthday):
-    # if VerifyCPF(cpf):
-    #     showMessage('CPF already exists', 'error')
-    # else:
+def convertStringInDate(birthday):
+    try:
+        t = parser.parse(birthday, parser.parserinfo(dayfirst=True))
+        return t.strftime('%d-%m-%Y')
+    except Exception:
+        return None
 
-    print(name)
-    insertClient(name, sex, cpf, str(birthday))
-    showMessage('Client created', 'info')
+def newClient(name, sex, cpf, birthday):
+    if VerifyCPF(cpf):
+        showMessage('CPF already exists', 'error')
+    else:
+        print(birthday)
+        print(type(birthday))
+        insertClient(name, sex, cpf, str(birthday))
+        showMessage('Client created', 'info')
 
 def saveInformations(action):    
     match action:
