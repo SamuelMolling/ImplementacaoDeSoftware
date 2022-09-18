@@ -1,3 +1,4 @@
+from operator import index
 import sqlalchemy as db
 import sqlalchemy.orm as orm
 
@@ -11,7 +12,7 @@ class Client(Base):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100), nullable=False)
   sex = db.Column(db.String(1), nullable=False)
-  cpf = db.Column(db.String(11), nullable=False)
+  cpf = db.Column(db.String(11), nullable=False, index=True)
   birthday = db.Column(db.Date, nullable=False)
 
 # Bank Account table 

@@ -1,4 +1,3 @@
-from curses.ascii import isdigit
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry

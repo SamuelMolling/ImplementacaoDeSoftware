@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from lib.main import checkNumber, showMessage
 
 
 class makeDepositWindow(tk.Tk):
@@ -8,26 +9,37 @@ class makeDepositWindow(tk.Tk):
   # Create the secondary window
   self.title("Make a deposit")
   self.geometry('300x300')
+
+  self.cpf = tk.StringVar(),
+  self.value = tk.DoubleVar()
   
   def destroy():
     op = messagebox.askyesno("Exit","Do you want to exit?")
     if op>0:
         self.destroy()
 
+  def makeDeposit():
+    if checkNumber(self.cpf.get()) and len(self.cpf.get()) == 11:
+      cpf = self.cpf.get()
+      value = self.value.get()
+      makeDeposit(cpf, value)
+    else:
+      showMessage("Please, verify the information name or CPF.", 'error')
+
   # CPF
   self.label = tk.Label(self, text="Enter with your CPF")
-  self.entry = tk.Entry(self) 
+  self.cpf = tk.Entry(self) 
   self.label.pack()
-  self.entry.pack()
+  self.cpf.pack()
 
   # Balance
   self.label = tk.Label(self, text="Insert a value for the deposit")
-  self.entry = tk.Entry(self)
+  self.value = tk.Entry(self)
   self.label.pack() 
-  self.entry.pack()
+  self.value.pack()
 
   # Button for save
-  self.button = tk.Button(self, text="Save", command=destroy)
+  self.button = tk.Button(self, text="Save", command=makeDeposit)
   self.button.pack()
     
   # Quit

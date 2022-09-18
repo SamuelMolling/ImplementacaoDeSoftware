@@ -3,13 +3,6 @@ from datetime import *
 from tkinter import messagebox
 from lib.db_helper import *
 
-# bankAccount = {
-#     'id': tk.IntVar(),
-#     'balance': tk.IntVar(),
-#     'cpf': tk.StringVar(),
-#     'accountType': tk.StringVar()
-# }
-
 # accountType = {
 #     'id': tk.IntVar(),
 #     'type': tk.StringVar()
@@ -26,6 +19,7 @@ from lib.db_helper import *
 #     'account': tk.IntVar(),
 #     'movimentationType': tk.IntVar()
 # }
+
 # Show message
 def showMessage(text, type):
     types = {
@@ -48,13 +42,6 @@ def VerifyCPF(cpf):
     if getCPF(cpf):
         return True
 
-# def convertStringInDate(birthday):
-#     try:
-#         datetime.datetime.strptime(birthday, '%d/%m/%Y')
-#         # (birthday, '%Y/%mm/%dd')
-#     except Exception as e:
-#         return e
-
 def convertStringInDate(birthday):
     try:
        return datetime.strptime(birthday,'%d/%m/%Y')
@@ -70,15 +57,22 @@ def newClient(name, sex, cpf, birthday):
         insertClient(name, sex, cpf, birthday)
         showMessage('Client created', 'info')
 
-def saveInformations(action):    
-    match action:
-        case 2:
-            insertBankAccount(bankAccount['balance'].get, bankAccount['cpf'].get, bankAccount['accountType'].get)
-        case 3:
-            insertMovimentation(movimentation['value'].get, movimentation['account'].get, movimentation['movimentationType'].get)
-        case 4:
-            ValidateAction(movimentation['movimentationType'].get, movimentation['account'].get, movimentation['value'].get)
-        case 5:
-            getExtrato(movimentation['account'].get)
-        case 6:
-            validateToSave(movimentation['account'].get)
+def newAccountForCostumer(cpf, accountType, balance):
+    if VerifyCPF(cpf):
+        if not getBank(cpf):
+            cpf_id = getIdCPF(cpf)
+            accountTypeId = getAccountTypeId(accountType)
+            insertBankAccount(cpf_id[0][0], accountTypeId[0][0], balance)
+            showMessage('Account created', 'info')
+        else:
+            showMessage('Account already exists', 'error')
+    else:
+        showMessage('CPF not found', 'error')
+
+def makeDeposit(cpf, value):
+    if VerifyCPF(cpf):
+        balance = getBalance(cpf)
+        value += balance
+        updateBalance(cpf, value)
+    else:
+        showMessage('CPF not found', 'error')
