@@ -73,3 +73,5 @@ class initialWindow(tk.Tk):
   self.button = tk.Button(self, text="Quit", command=destroy)
   self.button.pack()
 
+  self.createby = tk.Label(self, text="Create By: Samuel Molling").pack()
+  self.version = tk.Label(self, text="Version 1.0").pack()
