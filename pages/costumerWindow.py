@@ -3,7 +3,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry
 from tkinter import messagebox
-from lib.main import checkNumber, convertStringInDate, newClient, showMessage
+from lib.main import checkNumber, checkString, convertStringInDate, newClient, showMessage
 
 class createCostumerWindow(tk.Tk):
  def __init__(self):
@@ -31,15 +31,14 @@ class createCostumerWindow(tk.Tk):
         self.destroy()
 
   def newCostumer():
-    if checkNumber(self.cpf.get()):
+    if checkNumber(self.cpf.get()) and len(self.cpf.get()) == 11 and checkString(self.name.get()) is False:
       name = self.name.get()
       sex = self.sex.get()
       cpf = self.cpf.get()
       birthday = self.birthday.get()
-      convertStringInDate(birthday)
       newClient(name, sex, cpf, birthday)
     else:
-      showMessage("Please, use numbers in CPF.", 'error')
+      showMessage("Please, verify the information name or CPF.", 'error')
 
 
   # # Id
@@ -69,7 +68,7 @@ class createCostumerWindow(tk.Tk):
 
   # Birthday
   self.label = tk.Label(self, text="Birthday")
-  self.birthday = DateEntry(self,selectmode='day',years=(1935, 2020))
+  self.birthday = DateEntry(self,selectmode='day',years=(1935, 2020),date_pattern='yyyy-MM-dd')
   self.label.pack()
   self.birthday.pack()
 

@@ -1,4 +1,4 @@
-import tkinter as tk
+
 from tkinter import messagebox
 from lib.db_helper import *
 from dateutil import parser
@@ -38,24 +38,35 @@ def showMessage(text, type):
 def checkNumber(cpf):
     return bool(cpf.isdigit())
 
+def checkString(name):
+    return bool(name.isdigit())
+
 def VerifyCPF(cpf):
     if getCPF(cpf):
         return True
 
+# def convertStringInDate(birthday):
+#     try:
+#         datetime.datetime.strptime(birthday, '%d/%m/%Y')
+#         # (birthday, '%Y/%mm/%dd')
+#     except Exception as e:
+#         return e
+
 def convertStringInDate(birthday):
     try:
-        t = parser.parse(birthday, parser.parserinfo(dayfirst=True))
-        return t.strftime('%d-%m-%Y')
-    except Exception:
-        return None
+        return parser.isoparse(birthday)
+        # (birthday, '%Y/%mm/%dd')
+    except Exception as e:
+        return e
 
 def newClient(name, sex, cpf, birthday):
     if VerifyCPF(cpf):
         showMessage('CPF already exists', 'error')
     else:
-        print(birthday)
         print(type(birthday))
-        insertClient(name, sex, cpf, str(birthday))
+        birthday = convertStringInDate(birthday)
+        print(type(birthday))
+        insertClient(name, sex, cpf, birthday)
         showMessage('Client created', 'info')
 
 def saveInformations(action):    
