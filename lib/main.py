@@ -54,16 +54,22 @@ def newClient(name, sex, cpf, birthday):
         showMessage('CPF already exists', 'error')
     else:
         birthday = convertStringInDate(birthday)
-        insertClient(name, sex, cpf, birthday)
-        showMessage('Client created', 'info')
+        error = insertClient(name, sex, cpf, birthday)
+        if error != None:
+            showMessage(error, 'error')
+        else:
+            showMessage('Client created', 'info')
 
 def newAccountForCostumer(cpf, accountType, balance):
     if VerifyCPF(cpf):
         if not getBank(cpf):
             cpf_id = getIdCPF(cpf)
             accountTypeId = getAccountTypeId(accountType)
-            insertBankAccount(cpf_id[0][0], accountTypeId[0][0], balance)
-            showMessage('Account created', 'info')
+            error = insertBankAccount(cpf_id[0][0], accountTypeId[0][0], balance)
+            if error != None:
+                showMessage(error, 'error')
+            else:
+                showMessage('Account created', 'info')
         else:
             showMessage('Account already exists', 'error')
     else:

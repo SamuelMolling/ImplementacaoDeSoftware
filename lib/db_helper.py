@@ -36,7 +36,7 @@ def insertClient(name, sex, cpf, birthday):
         session.commit()
     except Exception as e:
         session.rollback()
-        print(e)
+        return e
 
 def insertBankAccount(cpf, accountType, balance):
     try:
@@ -52,7 +52,7 @@ def insertBankAccount(cpf, accountType, balance):
         session.commit()
     except Exception as e:
         session.rollback()
-        print(e)
+        return e
 
 def updateBalance(client_id, balance):
     try:
