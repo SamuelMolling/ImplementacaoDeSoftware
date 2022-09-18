@@ -12,7 +12,7 @@ class Client(Base):
   name = db.Column(db.String(100), nullable=False)
   sex = db.Column(db.String(1), nullable=False)
   cpf = db.Column(db.String(11), nullable=False)
-  birth_date = db.Column(db.Date, nullable=False)
+  birthday = db.Column(db.Date, nullable=False)
 
 # Bank Account table 
 class BankAccount(Base):

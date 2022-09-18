@@ -5,17 +5,18 @@ from tkinter import messagebox
 class createNewAccountWindow(tk.Tk):
  def __init__(self):
   super().__init__()
+
   # Create the secondary window
   self.title("Create New Account for a Costumer")
   self.geometry('300x300')
 
+  # Create new costumer
   def destroy():
     op = messagebox.askyesno("Exit","Do you want to exit?")
     if op>0:
         self.destroy()
 
   # CPF
-
   self.label = tk.Label(self, text="Enter with your CPF")
   self.entry = tk.Entry(self)
   self.label.pack()

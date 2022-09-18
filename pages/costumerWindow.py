@@ -3,33 +3,29 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from tkcalendar import DateEntry
 from tkinter import messagebox
-from lib.main import checkNumber, checkString, convertStringInDate, newClient, showMessage
+from lib.main import checkNumber, checkString, newClient, showMessage
 
 class createCostumerWindow(tk.Tk):
  def __init__(self):
   super().__init__()
+  
   # Create the secondary window
   self.title("Create New Costumer")
   self.geometry('300x300')
 
-  # self.var_client = {
-  #   'id': tk.IntVar(),
-  #   'name': tk.StringVar(),
-  #   'sex': tk.StringVar(),
-  #   'cpf': tk.StringVar(),
-  #   'birthday': tk.StringVar()
-  # }
   self.id = tk.IntVar(),
   self.name = tk.StringVar(),
   self.sex = tk.StringVar(),
   self.cpf = tk.StringVar(),
   self.birthday = tk.StringVar()
 
+  # Destroy this page
   def destroy():
     op = messagebox.askyesno("Exit","Do you want to exit?")
     if op>0:
         self.destroy()
 
+  # Create new costumer
   def newCostumer():
     if checkNumber(self.cpf.get()) and len(self.cpf.get()) == 11 and checkString(self.name.get()) is False:
       name = self.name.get()
@@ -39,13 +35,6 @@ class createCostumerWindow(tk.Tk):
       newClient(name, sex, cpf, birthday)
     else:
       showMessage("Please, verify the information name or CPF.", 'error')
-
-
-  # # Id
-  # self.label = tk.Label(self, text="Id", state=tk.DISABLED)
-  # self.entry = tk.Entry(self, state=tk.DISABLED)
-  # self.label.pack()
-  # self.entry.pack()
 
   # Name
   self.label = tk.Label(self, text="Name")
@@ -68,7 +57,7 @@ class createCostumerWindow(tk.Tk):
 
   # Birthday
   self.label = tk.Label(self, text="Birthday")
-  self.birthday = DateEntry(self,selectmode='day',years=(1935, 2020),date_pattern='yyyy-MM-dd')
+  self.birthday = DateEntry(self,selectmode='day',years=(1935, 2020),date_pattern='d/m/Y')
   self.label.pack()
   self.birthday.pack()
 

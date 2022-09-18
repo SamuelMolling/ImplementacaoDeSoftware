@@ -1,7 +1,7 @@
 
+from datetime import *
 from tkinter import messagebox
 from lib.db_helper import *
-from dateutil import parser
 
 # bankAccount = {
 #     'id': tk.IntVar(),
@@ -26,7 +26,7 @@ from dateutil import parser
 #     'account': tk.IntVar(),
 #     'movimentationType': tk.IntVar()
 # }
-
+# Show message
 def showMessage(text, type):
     types = {
         'error': messagebox.showerror,
@@ -35,12 +35,15 @@ def showMessage(text, type):
     }
     types[type](type,text)
 
+# Check if cpf is only numbers
 def checkNumber(cpf):
     return bool(cpf.isdigit())
 
+# Check if string is only letters
 def checkString(name):
     return bool(name.isdigit())
 
+# Check if the account exists
 def VerifyCPF(cpf):
     if getCPF(cpf):
         return True
@@ -54,18 +57,16 @@ def VerifyCPF(cpf):
 
 def convertStringInDate(birthday):
     try:
-        return parser.isoparse(birthday)
-        # (birthday, '%Y/%mm/%dd')
+       return datetime.strptime(birthday,'%d/%m/%Y')
     except Exception as e:
         return e
 
+# Create new costumer
 def newClient(name, sex, cpf, birthday):
     if VerifyCPF(cpf):
         showMessage('CPF already exists', 'error')
     else:
-        print(type(birthday))
         birthday = convertStringInDate(birthday)
-        print(type(birthday))
         insertClient(name, sex, cpf, birthday)
         showMessage('Client created', 'info')
 
