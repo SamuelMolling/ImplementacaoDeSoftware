@@ -12,7 +12,7 @@ def getIdCPF(cpf):
     return session.query(Client.id).where(Client.cpf == cpf).all()
 
 def getCostumer(cpf):
-    return session.query(Client).where(Client.cpf == cpf).all()
+    return session.query(Client.name, Client.cpf, Client.sex, Client.birthday).where(Client.cpf == cpf).all()
 
 def getBank(cpf):
     return bool(cpf := session.query(BankAccount).join(Client).where(Client.cpf == cpf).all())
@@ -31,6 +31,9 @@ def getBalance(cpf):
 
 def getAccountType(cpf):
     return session.query(BankAccount.account_type).where(BankAccount.client_id == cpf).all()
+
+def getAccountInfo(cpf_id):
+    return session.query(BankAccount.balance, AccountType.type).join(AccountType).where(BankAccount.client_id == cpf_id).all()
 
 def insertClient(name, sex, cpf, birthday):
     try:
@@ -90,7 +93,7 @@ def insertMovimentation(action, account_id, date, value):
         session.rollback()
         return e
 
-def getExtrat(id_bank, initial_date, finish_date):
+def getExtract(id_bank, initial_date, finish_date):
     return session.query(Movimentation).join(BankAccount).where(BankAccount.id == id_bank and (Movimentation.date.between(initial_date, finish_date))).all()
 
 session.close()

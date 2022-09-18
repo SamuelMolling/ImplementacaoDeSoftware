@@ -2,6 +2,7 @@
 from datetime import *
 from tkinter import messagebox
 from lib.db_helper import *
+from pages.extract import ExtractWindow
 
 operations = {
     1: "Deposit",
@@ -134,19 +135,21 @@ def Operation(action, cpf, value):
         balance = getBalance(cpf_id[0][0])
         showMessage('Operation '+ operations[action] +' is done. \nYour new balance is: '+ str(round(balance[0][0],2)) + 'R$', 'info')
 
-def getExtract(cpf, initial_date, finish_date):
+def makeExtract(cpf, initial_date, finish_date):
     if VerifyCPF(cpf):
         if getBank(cpf):
+            cpf_id = getIdCPF(cpf)
             costumer = getCostumer(cpf)
-            bankAccount = getBankAccount(cpf)
+            # bankAccount = getBankAccount(cpf)
             id_bank = getIdBank(cpf)
             initial_date = convertStringInDate(initial_date)
             finish_date = convertStringInDate(finish_date)
             extract = getExtract(id_bank[0][0], initial_date, finish_date)
+            bankInfo = getAccountInfo(cpf_id[0][0])
             if extract is None:
                 showMessage('No extract found', 'info')
             else: 
-                ExtractWindow(costumer, bankAccount, extract)
+                ExtractWindow(costumer, bankInfo, extract)
         else:
             showMessage('Account does not exists', 'error')
     else:
