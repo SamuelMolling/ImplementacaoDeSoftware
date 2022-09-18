@@ -35,7 +35,7 @@ class makeWithdrawalWindow(tk.Tk):
   self.cpf.pack()
 
   # Balance
-  self.label = tk.Label(self, text="Insert a value for the deposit")
+  self.label = tk.Label(self, text="Insert a value for the withdrawal")
   self.value = tk.Entry(self) 
   self.label.pack()
   self.value.pack()

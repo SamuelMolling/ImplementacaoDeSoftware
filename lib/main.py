@@ -75,10 +75,13 @@ def Operation(action, cpf, value):
                     error = updateBalance(cpf_id[0][0], balance)
                     if error != None:
                         showMessage(error, 'error')
+                        return
                 else:
                     showMessage('Account does not exists', 'error')
+                    return
             else:
                 showMessage('CPF not found', 'error')
+                return
         case 2: #Withdraw
             if VerifyCPF(cpf):
                 if getBank(cpf):
@@ -86,28 +89,43 @@ def Operation(action, cpf, value):
                     balance = getBalance(cpf_id[0][0])
                     balance = balance[0][0] - float(value)
                     if balance >= 0:
-                        error = updateBalance(cpf_id[0][0], balance)
-                        if error != None:
-                            showMessage(error, 'error')
+                        if (getAccountType(cpf_id[0][0])[0][0] == 1 or getAccountType(cpf_id[0][0])[0][0] == 2):
+                            error = updateBalance(cpf_id[0][0], balance)
+                            if error != None:
+                                showMessage(error, 'error')
+                                return
+                        else:
+                            showMessage('Account type does not allow withdraw', 'error')
+                            return
                     else:
                         showMessage('Insufficient balance', 'error')
+                        return
                 else:
                     showMessage('Account does not exists', 'error')
+                    return
             else:
                 showMessage('CPF not found', 'error')
+                return
         case 3:  #Apply juros
             if VerifyCPF(cpf):
                 if getBank(cpf):
                     cpf_id = getIdCPF(cpf)
                     balance = getBalance(cpf_id[0][0])
                     balance = balance[0][0] + (balance[0][0] * (float(value)/100))
-                    error = updateBalance(cpf_id[0][0], balance)
-                    if error != None:
-                        showMessage(error, 'error')
+                    if (getAccountType(cpf_id[0][0])[0][0] == 2 or getAccountType(cpf_id[0][0])[0][0] == 3):
+                        error = updateBalance(cpf_id[0][0], balance)
+                        if error != None:
+                            showMessage(error, 'error')
+                            return
+                    else:
+                        showMessage('Account type not provide this operation', 'error')
+                        return
                 else:
                     showMessage('Account does not exists', 'error')
+                    return
             else:
                 showMessage('CPF not found', 'error')
+                return
     id_bank = getIdBank(cpf)
     error = insertMovimentation(action, id_bank[0][0], datetime.now(), value)
     if error != None:

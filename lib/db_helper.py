@@ -29,6 +29,9 @@ def getAccountTypeId(accountType):
 def getBalance(cpf):
     return session.query(BankAccount.balance).where(BankAccount.client_id == cpf).all()
 
+def getAccountType(cpf):
+    return session.query(BankAccount.account_type).where(BankAccount.client_id == cpf).all()
+
 def insertClient(name, sex, cpf, birthday):
     try:
         default = [

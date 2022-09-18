@@ -56,7 +56,7 @@ class extractWindow(tk.Tk):
       orient='horizontal',length=150)
   hr.pack()
 
-  i_mn=tk.Label(self,text='Mintue').pack()
+  i_mn=tk.Label(self,text='Minute').pack()
   mn = tk.Scale(self, from_=0, to=59,
       orient='horizontal',length=150)
   mn.pack()
@@ -77,7 +77,7 @@ class extractWindow(tk.Tk):
       orient='horizontal',length=150)
   hr.pack()
 
-  f_mn=tk.Label(self,text='Mintue').pack()
+  f_mn=tk.Label(self,text='Minute').pack()
   mn = tk.Scale(self, from_=0, to=59,
       orient='horizontal',length=150)
   mn.pack()
