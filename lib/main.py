@@ -38,6 +38,13 @@ def convertStringInDate(birthday):
     except Exception as e:
         return e
 
+def convertStringInDatetime(date):
+    try:
+       return datetime.strptime(date,'%d/%m/%Y %H:%M:%S')
+    except Exception as e:
+        return e
+
+
 # Create new costumer
 def newClient(name, sex, cpf, birthday):
     if VerifyCPF(cpf):
@@ -141,14 +148,14 @@ def makeExtract(cpf, initial_date, finish_date):
             cpf_id = getIdCPF(cpf)
             costumer = getCostumer(cpf)
             id_bank = getIdBank(cpf)
-            initial_date = convertStringInDate(initial_date)
-            finish_date = convertStringInDate(finish_date)
+            initial_date = convertStringInDatetime(f"{initial_date} 00:00:00")
+            finish_date = convertStringInDatetime(f"{finish_date} 23:59:59")
             extract = getExtract(id_bank[0][0], initial_date, finish_date)
             bankInfo = getAccountInfo(cpf_id[0][0])
             if extract is None:
                 showMessage('No extract found', 'info')
             else: 
-                ExtractWindow(costumer, bankInfo, extract)
+                ExtractWindow(costumer, bankInfo, extract, initial_date, finish_date)
         else:
             showMessage('Account does not exists', 'error')
     else:

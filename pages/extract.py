@@ -1,29 +1,27 @@
 from tkinter import *
-from tkinter import messagebox
 import tkinter.ttk as ttk
 
-def ExtractWindow(costumer, account, movimentations):
-    def clicked():
-        if curItem := tree.focus():
-            messagebox.showinfo('Item', tree.item(curItem))
-        else:
-            messagebox.showinfo('Item', 'Item not selected')
+def ExtractWindow(costumer, account, movimentations, initialDate, finalDate):
 
     window = Tk()
     window.title("Extract Window")
     window.geometry('800x800')
 
     ##### Cabeçalho #####
-
-    Label(window, text="Costumer information").pack()
+    Label(window, text="Costumer information", font=('Times', 24)).pack()
     Label(window, text=f"Name:{costumer[0][0]}").pack()
     Label(window, text=f"CPF:{costumer[0][1]}").pack()
     Label(window, text=f"Sex:{costumer[0][2]}").pack()
     Label(window, text=f"Birthday:{costumer[0][3]}").pack()
     Label(window, text="").pack()
-    Label(window, text="Bank information").pack()
+    Label(window, text="Bank information", font=('Times', 24)).pack()
     Label(window, text=f"Balance: {account[0][0]} R$").pack()
     Label(window, text=f"Account Type: {account[0][1]}").pack()
+    Label(window, text="").pack()
+    Label(window, text="Search date", font=('Times', 24)).pack()
+    Label(window, text=f"Initial Date: {initialDate}").pack()
+    Label(window, text=f"Final Date: {finalDate}").pack()
+    Label(window, text="").pack()
 
     ##### Movimentations #####
     movimentacao = ttk.Treeview(window, columns=('Date', 'Type', 'Value'), show='headings')
@@ -50,13 +48,12 @@ def ExtractWindow(costumer, account, movimentations):
         elif movimentation[1] == 'juros':
             qnt_interest += 1
             value_interest += movimentation[2]
-    
+
+    ##### Rodapé #####
     Label(window, text="").pack()
-    Label(window, text="Movimentations").pack()
-    Label(window, text=f"Deposit: {qnt_deposit} times, total value: {value_deposit} R$").pack()
-    Label(window, text=f"Withdraw: {qnt_withdraw} times, total value: {value_withdraw} R$").pack()
+    Label(window, text="Movimentations", font=('Times', 24)).pack()
+    Label(window, text=f"Deposit: {qnt_deposit} times, total value: {round(value_deposit,2)} R$").pack()
+    Label(window, text=f"Withdraw: {qnt_withdraw} times, total value: {round(value_withdraw,2)} R$").pack()
     Label(window, text=f"Interest: {qnt_interest} times, total value: {value_interest} %").pack()
-    ##### Rodapé #####
-    ##### Rodapé #####
 
     window.mainloop()

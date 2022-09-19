@@ -94,7 +94,7 @@ def insertMovimentation(action, account_id, date, value):
         return e
 
 def getExtract(id_bank, initial_date, finish_date):
-    return session.query(Movimentation.date, MovimentationType.type, Movimentation.value).join(MovimentationType).join(BankAccount).where(BankAccount.id == id_bank and (Movimentation.date.between(initial_date, finish_date))).all()
+    return session.query(Movimentation.date, MovimentationType.type, Movimentation.value).join(MovimentationType).join(BankAccount).where(BankAccount.id == id_bank, Movimentation.date.between(initial_date, finish_date)).all()
 
 session.close()
 conn.close()
