@@ -140,7 +140,6 @@ def makeExtract(cpf, initial_date, finish_date):
         if getBank(cpf):
             cpf_id = getIdCPF(cpf)
             costumer = getCostumer(cpf)
-            # bankAccount = getBankAccount(cpf)
             id_bank = getIdBank(cpf)
             initial_date = convertStringInDate(initial_date)
             finish_date = convertStringInDate(finish_date)

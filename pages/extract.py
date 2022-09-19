@@ -15,46 +15,48 @@ def ExtractWindow(costumer, account, movimentations):
 
     ##### Cabeçalho #####
 
-    for i in costumer:
-        Label(window, text=costumer[0][i]).pack()
-    # Label(window, text=f"Name:{costumer[0][0]}").pack()
-    # Label(window, text="Costumer information").pack()
-    # costumerInformationColumn = ('Name', 'CPF', 'Sex', 'Birthday')
-    # costumer_view = ttk.Treeview(window, columns=costumerInformationColumn, height=50, selectmode="extended", show='headings')
-    # costumer_view.heading('Name', text="Name")
-    # costumer_view.heading('CPF', text="CPF")
-    # costumer_view.heading('Sex', text="Sex")
-    # costumer_view.heading('Birthday', text="Birthday")
+    Label(window, text="Costumer information").pack()
+    Label(window, text=f"Name:{costumer[0][0]}").pack()
+    Label(window, text=f"CPF:{costumer[0][1]}").pack()
+    Label(window, text=f"Sex:{costumer[0][2]}").pack()
+    Label(window, text=f"Birthday:{costumer[0][3]}").pack()
+    Label(window, text="").pack()
+    Label(window, text="Bank information").pack()
+    Label(window, text=f"Balance: {account[0][0]} R$").pack()
+    Label(window, text=f"Account Type: {account[0][1]}").pack()
 
-    # for x in costumer:
-    #     costumer_view.insert('', 'end', values=(x[0], x[1], x[2], x[3]))
-    # costumer_view.pack()
+    ##### Movimentations #####
+    movimentacao = ttk.Treeview(window, columns=('Date', 'Type', 'Value'), show='headings')
+    movimentacao.heading('Date', text='Date')
+    movimentacao.heading('Type', text='Type')
+    movimentacao.heading('Value', text='Value')
+    movimentacao.pack()
 
-    # Label(window, text="Bank information").pack()
-    # bankingInformationColumn = ('AccountType', 'Balance')
-    # banking_view = ttk.Treeview(window, columns=bankingInformationColumn, height=200, selectmode="extended", show='headings')
-    # banking_view.heading('AccountType', text="AccountType", anchor=W)
-    # banking_view.heading('Balance', text="Balance", anchor=W)
+    qnt_deposit = 0
+    qnt_withdraw = 0
+    qnt_interest = 0
+    value_deposit = 0
+    value_withdraw = 0
+    value_interest = 0
 
-    # for x in account:
-    #     banking_view.insert('', 'end', values=(x[0], x[1]))
-    # banking_view.pack()
-
-    # ##### Movimentações #####
-    # Label(window, text="Movimentations").pack()
-    # ##### Movimentações #####
-    # movimentationsColumn = ('Date', 'Description', 'Value')
-    # tree = ttk.Treeview(window, columns=movimentationsColumn, height=200, selectmode="extended", show='headings')
-    # tree.heading('Date', text="Date", anchor=W)
-    # tree.heading('Description', text="Description", anchor=W)
-    # tree.heading('Value', text="Value", anchor=W)
-
-    # for x in movimentations:
-    #     tree.insert('', 'end', values=(x[0], x[1], x[2]))
-    # tree.pack()
-
+    for movimentation in movimentations:
+        movimentacao.insert('', 'end', values=(movimentation[0], movimentation[1], movimentation[2]))
+        if movimentation[1] == 'deposito':
+            qnt_deposit += 1
+            value_deposit += movimentation[2]
+        elif movimentation[1] == 'saque':
+            qnt_withdraw += 1
+            value_withdraw += movimentation[2]
+        elif movimentation[1] == 'juros':
+            qnt_interest += 1
+            value_interest += movimentation[2]
+    
+    Label(window, text="").pack()
+    Label(window, text="Movimentations").pack()
+    Label(window, text=f"Deposit: {qnt_deposit} times, total value: {value_deposit} R$").pack()
+    Label(window, text=f"Withdraw: {qnt_withdraw} times, total value: {value_withdraw} R$").pack()
+    Label(window, text=f"Interest: {qnt_interest} times, total value: {value_interest} %").pack()
     ##### Rodapé #####
     ##### Rodapé #####
-    Button(window, text="Ler item", command=clicked).pack()
 
     window.mainloop()
