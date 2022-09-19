@@ -15,5 +15,3 @@ Run this code is very easy :)
 ```bash
 python3 main.py
 ```
-
-TESTE
