@@ -1,0 +1,11 @@
+id,modelo,cor,ano,odometro,id_cidade,disponivel,valor_diaria,valor_km_rodado
+1,Gol,Cinza,2016,137852,7,True,108.67,0.93
+2,Up,Branco,2017,86541,8,False,70.12,0.47
+3,Argo,Preto,2019,42876,1,True,121.4,1.02
+4,Mobi,Vermelho,2018,61907,3,True,76.19,0.39
+5,Gol,Azul,2019,49389,2,False,77.47,0.51
+6,Onix,Prata,2017,77635,4,False,78.74,0.55
+7,Sandero,Cinza,2019,34518,8,True,82.61,0.64
+8,Duster,Branco,2018,57114,7,True,118.17,1.05
+9,Cruze,Preto,2020,8013,6,False,120.63,1.08
+10,Argo,Vermelho,2017,106857,5,True,91.96,0.63

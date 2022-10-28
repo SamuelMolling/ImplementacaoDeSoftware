@@ -1,4 +1,3 @@
-from operator import index
 import sqlalchemy as db
 import sqlalchemy.orm as orm
 
