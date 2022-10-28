@@ -3,9 +3,6 @@ from crypt import methods
 from app import app
 from datetime import datetime as dt
 from flask import render_template, make_response, jsonify
-from models import Client
-
-
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
@@ -15,6 +12,10 @@ def index():
 @app.route('/consult', methods=['GET'])
 def consult():
     return render_template('consult_vehcicles.html')
+
+@app.route('/getVehicles', methods=['GET'])
+def getVehicles():
+    pass
 
 @app.route('/makelease', methods=['GET'])
 def getClient():

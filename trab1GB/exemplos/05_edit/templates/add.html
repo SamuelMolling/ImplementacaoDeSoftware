@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% if operacao %}
+<h3>{{ operacao }}</h3>
+{% endif %}
+
+<form action="{{ url_for('add') }}" method="post">
+    <!-- Cross-Site Request Forgery -->
+    {{ form.csrf_token }}
+    {{ form.title.label }}
+    {{ form.title }}
+    {{ form.submit }}
+</form>
+
+{% endblock %}

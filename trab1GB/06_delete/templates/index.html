@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h1>Tarefas: {{ tasks|length }}</h1>
+<hr>
+{% for task in tasks %}
+<h3>{{ task.title }}</h3>
+<p>Criada em {{ task.create_date.strftime('%d/%m/%Y %H:%M:%S') }}</p>
+<p>Ultima atualização: {{ task.update_date }}</p>
+<a href="{{ url_for('edit', task_id=task.id) }}">Editar</a>
+<a href="{{ url_for('delete', task_id=task.id) }}">Excluir</a>
+<hr>
+{% endfor %}
+
+{% endblock %}

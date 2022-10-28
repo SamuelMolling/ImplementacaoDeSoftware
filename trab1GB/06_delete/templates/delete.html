@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% if operacao %}
+<h3>{{ operacao }}</h3>
+{% endif %}
+
+<p>Remover a tarefa "<strong>{{ title }}</strong>" ?</p>
+
+<form action="{{ url_for('delete', task_id=task_id) }}" method="post">
+  <!-- Cross-Site Request Forgery -->
+  {{ form.csrf_token }}
+  {{ form.submit() }}
+  {{ form.cancel() }}
+</form>
+{% endblock %}
