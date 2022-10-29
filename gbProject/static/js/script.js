@@ -8,8 +8,16 @@ $(document).ready(function () {
                 $('#btn_consult_vehcicles_by_model').html(data);
             }})
     });
+    // $('#search').click(function () {
+    //     $(this).load('/getVehicles');
+    // });
     $('#search').click(function () {
-        $(this).load('/getVehicles');
+        $.ajax({
+            url: '/getVehicles',
+            type: 'GET',
+            success: function (data) {
+                $('#result').html(data);
+            }})
     });
 
 
