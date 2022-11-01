@@ -1,3 +1,4 @@
+from unicodedata import name
 from app import db, app
 import csv
 
@@ -5,13 +6,13 @@ class Client(db.Model):
     __tablename__ = 'client'
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(20), nullable=False)
 
 class City(db.Model):
     __tablename__ = 'city'
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(30), nullable=False)
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicle'
@@ -57,14 +58,14 @@ if __name__ == '__main__':
             reader = csv.reader(f)
             next(reader)
             for row in reader:
-                db.session.add(Client(nome=row[1]))
+                db.session.add(Client(name=row[1]))
         db.session.commit()
 
         with open('database/cidade.csv', 'r') as f:
             reader = csv.reader(f)
             next(reader)
             for row in reader:
-                db.session.add(City(nome=row[1]))
+                db.session.add(City(name=row[1]))
         db.session.commit()
 
         with open('database/veiculo.csv', 'r') as f:
@@ -79,6 +80,8 @@ if __name__ == '__main__':
             reader = csv.reader(f)
             next(reader)
             for row in reader:
-                db.session.add(Location(id_vehicle=row[1], id_client=row[2], id_origin_city=row[3], id_destination_city=row[4], km_driven=row[5], days=row[6]))
+                destination = row[4] if row[4] != '' else None
+                km_driven = row[5] if row[5] != '' else None
+                db.session.add(Location(id_vehicle=row[1], id_client=row[2], id_origin_city=row[3], id_destination_city=destination, km_driven=km_driven, days=row[6]))
         db.session.commit()
 

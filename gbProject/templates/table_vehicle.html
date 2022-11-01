@@ -1,0 +1,28 @@
+{% block main %}
+
+<table border="1">
+    <tr>
+        <th>Model</th>
+        <th>Color</th>
+        <th>Year</th>
+        <th>Odometer (km)</th>
+        <th>Available</th>
+        <th>Daily Value</th>
+        <th>KM Value (R$)</th>
+        <th>City</th>
+    </tr>
+    {% for vehicle in vehicles %}
+    <tr>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.color }}</td>
+        <td>{{ vehicle.year }}</td>
+        <td>{{ vehicle.odometer }}</td>
+        <td>{{ vehicle.available }}</td>
+        <td>{{ vehicle.daily_value }}</td>
+        <td>{{ vehicle.km_value }}</td>
+        <td>{{ vehicle.city.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

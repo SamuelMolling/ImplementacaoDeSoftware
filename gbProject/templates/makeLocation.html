@@ -1,0 +1,14 @@
+{% block main %}
+
+<div>
+    <label for="Vehicles">Vehicles available</label><br></br>
+    {% for vehicle in vehicles %}
+    <label for="vehicle">{{ vehicle.model }}, {{ vehicle.color }}, {{ vehicle.year }}</label>
+    <input type="radio" name="vehicle" value="{{ vehicle.id }}" id="vehicle_option"><br></br>
+    {% endfor %}
+
+    <input type="text" id="numberOfDays" name="numberOfDays" placeholder="Number of days"> <br></br>
+    <input type="submit" id="btn_confirm" name="btn_confirm" value="Confirm" />
+</div>
+
+{% endblock %}
