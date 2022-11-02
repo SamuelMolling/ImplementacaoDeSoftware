@@ -7,7 +7,7 @@
     <input type="radio" name="vehicle" value="{{ vehicle.id }}" id="vehicle_option"><br></br>
     {% endfor %}
 
-    <input type="text" id="numberOfDays" name="numberOfDays" placeholder="Number of days"> <br></br>
+    <input type="number" min="1" oninput="validity.valid||(value='');" id="numberOfDays" name="numberOfDays" placeholder="Number of days"> <br></br>
     <input type="submit" id="btn_confirm" name="btn_confirm" value="Confirm" />
 </div>
 

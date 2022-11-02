@@ -97,18 +97,11 @@ def makeLocation():
 
     elif request.method == 'POST':
         #Get the vehicle id
-        print("#########TESTE")
-        vehicle = request.form['vehicles']
-        days = request.form['days']
-
-        vehicle = vehicle.split(',' )
-        vehicle=vehicle.strip()
-
-        id_vehicle = Vehicle.query.filter(Vehicle.model==vehicle[0], Vehicle.color==vehicle[1], Vehicle.year==vehicle[2])
+        vehicle = int(request.form['vehicles'])
+        days = int(request.form['days'])
 
         #New location
-        new_location = Location(id_client=client_name, id_origin_city=origin_city, id_destination_city=None, km_driven=None,days=days, id_vehicle=id_vehicle)
-        # db.session.add(Location(id_vehicle=row[1], id_client=row[2], id_origin_city=row[3], id_destination_city=destination, km_driven=km_driven, days=row[6]))
+        new_location = Location(id_client=client_name, id_origin_city=origin_city, id_destination_city=None, km_driven=None,days=days, id_vehicle=vehicle)
         #Create a new location
         db.session.add(new_location)
         db.session.commit()

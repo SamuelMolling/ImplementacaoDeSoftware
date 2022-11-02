@@ -1,11 +1,12 @@
 $(document).ready(function () {
+
     //Button for consult vehicles
-    $('#btn_consult_vehicles').click(function () {
+    $('#btn_consult_vehcicles').click(function () {
         $.ajax({
             url: '/consultVehcicle',
             type: 'GET',
             success: function (data) {
-                $('#btn_consult_vehicles_by_model').html(data);
+                $('#btn_consult_vehcicles_by_model').html(data);
                 $('#search_submit').click( function() {
                     var selectval = $('#parameter_type').val();
                     var selectval2 = $('#search_text').val();
@@ -21,7 +22,7 @@ $(document).ready(function () {
                         });
                     }
                 })
-            }})
+        }   })
     });
 
     //Button for make lease
@@ -43,25 +44,31 @@ $(document).ready(function () {
                     }, function(data) {
                         $('#result').html(data);
                         $('#btn_confirm').click(function () {
-                            var client_name = $('#names_button').val();
-                            var origin_city = $('#origin_city_button').val();
-                            var vehicles = $('#vehicle_option').val()
                             var days = $('#numberOfDays').val()
-                            $.post('/makeLocation'),
-                            {
-                                client_name: client_name,
-                                origin_city: origin_city,
-                                vehicles: vehicles,
-                                days: days
-                            }, function(data) {
-                                $('#result').html(data);
+                            var vehicle_id = $("input[name='vehicle']:checked").val();
+                            if(!vehicle_id){
+                                alert("Select a vehicle option");
+                            } else {
+                                if ((days == '')){
+                                    alert("Please enter a day value");
+                                }else{
+                                    $.post('/makeLocation'),
+                                    {
+                                        client_name: client_name,
+                                        origin_city: origin_city,
+                                        vehicles: vehicle_id,
+                                        days: days
+                                    }, function(data, status) {
+                                        // alert(data);
+                                        $('#result').html(data);
+                                    }
+                                }
                             }
                         })
                     });
                 })
-
             }})
-   });
+    });
     
     //Button for make return
     $('#btn_make_return').click(function () {
@@ -90,7 +97,7 @@ $(document).ready(function () {
                 $('#btn_resume_html').html(data);
             }})
     });
-    })
+});
 
     // $('#search_submit').click(function () {
     //     var selectval = $('#parameter_type').val();
