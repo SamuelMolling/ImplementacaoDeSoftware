@@ -52,16 +52,15 @@ $(document).ready(function () {
                                 if ((days == '')){
                                     alert("Please enter a day value");
                                 }else{
-                                    $.post('/makeLocation'),
-                                    {
+                                    args = {
                                         client_name: client_name,
                                         origin_city: origin_city,
                                         vehicles: vehicle_id,
-                                        days: days
-                                    }, function(data, status) {
-                                        // alert(data);
+                                        days: days,
+                                    };
+                                    $.post('/makeLocation', args, function(data, status) {
                                         $('#result').html(data);
-                                    }
+                                    });
                                 }
                             }
                         })

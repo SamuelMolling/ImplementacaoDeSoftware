@@ -80,14 +80,14 @@ def getOriginCity():
 @app.route('/makeLocation', methods=['GET', 'POST'])
 def makeLocation():
 
-    client_name = int(request.args['client_name'])
-    origin_city = int(request.args['origin_city'])
-
     if request.method == 'GET':
+        client_name = int(request.args['client_name'])
+        origin_city = int(request.args['origin_city'])
         #Get locations for client
-        active_location = Location.query.filter(Location.id_client == client_name, Location.id_destination_city.is_(None)).all()
+        active_location = Location.query.filter(Location.id_client == client_name, Location.id_destination_city.is_(None)).first()
+        print(active_location)
 
-        if len(active_location) == 0:
+        if len(active_location[row]) == 0:
             return 'This client already has an active location'
 
         #Get vehicles available in the city
@@ -97,22 +97,29 @@ def makeLocation():
 
     elif request.method == 'POST':
         #Get the vehicle id
+        client_name = int(request.form['client_name'])
+        origin_city = int(request.form['origin_city'])
         vehicle = int(request.form['vehicles'])
         days = int(request.form['days'])
 
         #New location
-        new_location = Location(id_client=client_name, id_origin_city=origin_city, id_destination_city=None, km_driven=None,days=days, id_vehicle=vehicle)
-        #Create a new location
-        db.session.add(new_location)
-        db.session.commit()
-
-        #Update vehicle status
-        vehicle = Vehicle.query.get(vehicle)
-        vehicle.available = False
-        db.session.commit()
+        try:
+            new_location = Location(id_client=client_name, id_origin_city=origin_city, id_destination_city=None, km_driven=None,days=days, id_vehicle=vehicle)
+            db.session.add(new_location)
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            return 'Error in the application, please try again later'
+        
+        try: 
+            #Update the vehicle status
+            db.session.query(Vehicle).where(Vehicle.id == vehicle).update({Vehicle.available:False})
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            return 'Error in the application, please try again later'
 
         return 'Location created successfully'
-
 
 # @app.route('/makeLease', methods=['GET'])
 # def getClient():
