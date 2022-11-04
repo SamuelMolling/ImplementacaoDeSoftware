@@ -1,5 +1,12 @@
 {% block main %}
 
+<script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+<script src="https://unpkg.com/turndown-plugin-gfm/dist/turndown-plugin-gfm.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
+
+
+
 <div id="table_export">
     <table border="1">
         <tr>
@@ -30,10 +37,7 @@
         {% endfor %}
     </table>
 </div>
-
 <br></br>
-<h2>Download file</h2>
-<hr>
-<p>Click to <a href="/download">download</a> a markdown file</p>
+<input type="button" id="btnExport" value="Export Table data into Markdown" />
 
 {% endblock %}

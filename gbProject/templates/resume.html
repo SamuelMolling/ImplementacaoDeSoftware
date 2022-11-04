@@ -1,18 +1,54 @@
-<!-- {% block main %}
+{% block main %}
 
-<form action="#">
-    <label for="option">Select the option</label>
-    <select id="parameter_type" name="parameter_type">
-        <option value="Model">Model</option>
-        <option value="Color">Color</option>
-        <option value="City">City</option>
-    </select>
-</form>
-    <br><br>
-    <input type="text" id="search_text" name="search_text" placeholder="Search...">
-    <input type="submit" id="search_submit" name="search_submit" value="Submit" />
+<div>
+    <table border="1">
+        <tr>
+            <th>Cliente</th>
+            <th>Car Model</th>
+            <th>Car Color</th>
+            <th>Car Year</th>
+            <th>Car Odometer (KM)</th>
+            <th>Origin City</th>
+            <th>Destination City</th>
+            <th>Driven (KM)</th>
+            <th>Days</th>
+            <th>Total Price by</th>
+        </tr>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.client.name }}</td>
+            <td>{{ location.vehicle.model }}</td>
+            <td>{{ location.vehicle.color }}</td>
+            <td>{{ location.vehicle.year }}</td>
+            <td>{{ location.vehicle.odometer }}</td>
+            <td>{{ location.origin_city.name }}</td>
+            <td>{{ location.destination_city.name }}</td>
+            <td>{{ location.km_driven }}</td>
+            <td>{{ location.days }}</td>
+            <td>{{ total_value[loop.index0] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
-    <div id="result"></div>
+<div>
+    <h3>Total values of this resume</h3>
+</div>
+    <table border="1">
+        <tr>
+            <th>Total KM</th>
+            <th>Total days</th>
+            <th>Total daily value (R$/Day)</th>
+            <th>Total value by km (R$/km)</th>
+            <th>Total Value (R$)</th>
+        </tr>
+        <tr>
+            <td>{{ total_km }}</td>
+            <td>{{ total_days }}</td>
+            <td>{{ total_daily_value }}</td>
+            <td>{{ total_value_by_km }}</td>
+            <td>{{ total_value|sum }}</td>
+        </tr>
+    </table>
 
-
-{% endblock %} -->
+{% endblock %}

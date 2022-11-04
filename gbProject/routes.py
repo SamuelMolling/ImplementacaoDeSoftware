@@ -1,6 +1,6 @@
 # Arquivo routes.py
 from crypt import methods
-import string
+import markdownify
 from app import app
 from datetime import datetime as dt
 from flask import render_template, make_response, jsonify, request
@@ -33,7 +33,31 @@ def makeLeases():
 
 @app.route('/resume', methods=['GET'])
 def resume():
-    return render_template('resume.html')
+    locations = Location.query.join(Vehicle).filter(Location.id_destination_city.is_not(None))
+
+    total_value = []
+    days = 0
+    km_driven = 0
+    value_km = 0
+    value_day = 0
+
+
+    for location in locations:
+        value_day = location.days * location.vehicle.daily_value
+        value_km =  location.km_driven * location.vehicle.km_value
+        value = value_day + value_km
+        total_value.append(round(value,2))
+
+        days += location.days
+        km_driven += location.km_driven
+        value_km += location.vehicle.km_value
+        value_km = round(value_km,2)
+        value_day += location.vehicle.daily_value
+        value_day = round(value_day,2)
+
+
+    return render_template('resume.html', locations=locations, total_value=total_value, total_days=days, total_km=km_driven, total_value_by_km=value_km, total_daily_value=value_day)
+
 
 #Routes for consults
 @app.route('/getVehicles', methods=['GET'])
@@ -186,11 +210,3 @@ def consultLease():
         total_value.append(round(value,2))
 
     return render_template('table_location.html', locations=locations, total_value=total_value)
-
-@app.route('/download')
-def download():
-    content = 'Arquivo com conteúdo gerado dinamicamente em ' + dt.now().strftime('%Y-%m-%d %H:%M:%S')
-    response = make_response(content)
-    response.headers.set('Content-Type', 'text')
-    response.headers.set('Content-Disposition', 'attachment', filename='consultLease.md')
-    return response

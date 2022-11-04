@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
 
     //Button for consult vehicles
     $('#btn_consult_vehcicles').click(function () {
@@ -126,19 +127,29 @@ $(document).ready(function () {
                             parameter_type: selectval,
                             parameter_value: selectval2
                         }, function(data) {
-                            $('#result').html(data);
+                            $('#result').html(data);    
+                            $('#btnExport').click(function () {
+                                var gfm = turndownPluginGfm.gfm
+                                var turndownService = new TurndownService()
+                                turndownService.use(gfm)
+                                var markdown = turndownService.turndown($('#table_export').html())
+                                var blob = new Blob([markdown], { type: "text/markdown; charset=utf-8" });
+                                saveAs(blob, "table.md");
+                            })
                         });
                     }
                 }
-            )}})
+            )}
+        })
     });
+    
     //Button for resume
     $('#btn_resume').click(function () {
         $.ajax({
             url: '/resume',
             type: 'GET',
             success: function (data) {
-                $('#btn_resume_html').html(data);
+                $('#result').html(data);
             }})
     });
 });
