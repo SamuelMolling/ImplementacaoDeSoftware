@@ -85,9 +85,9 @@ def makeLocation():
         origin_city = int(request.args['origin_city'])
         #Get locations for client
         active_location = Location.query.filter(Location.id_client == client_name, Location.id_destination_city.is_(None)).first()
-        print(active_location)
+        # print(active_location)
 
-        if len(active_location[row]) == 0:
+        if active_location is None:
             return 'This client already has an active location'
 
         #Get vehicles available in the city
