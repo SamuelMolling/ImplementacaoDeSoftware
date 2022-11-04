@@ -1,0 +1,15 @@
+{% block main %}
+
+<div>
+    
+    Confirm information... <br></br>
+
+    <label> {{ vehicles.model }}, {{ vehicles.color }}, {{ vehicles.year }}</label> <br></br>
+    <label> Days used: {{ days }}</label> <br></br>
+    <label> Total Value: {{ value }} R$</label>
+
+    <br></br>
+    <input type="submit" id="btn_return" name="btn_return" value="Confirm" />
+</div>
+
+{% endblock %}

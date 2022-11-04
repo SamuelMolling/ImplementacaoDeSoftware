@@ -58,7 +58,7 @@ $(document).ready(function () {
                                         vehicles: vehicle_id,
                                         days: days,
                                     };
-                                    $.post('/makeLocation', args, function(data, status) {
+                                    $.post('/makeLocation', args, function(data) {
                                         $('#result').html(data);
                                     });
                                 }
@@ -72,12 +72,42 @@ $(document).ready(function () {
     //Button for make return
     $('#btn_make_return').click(function () {
         $.ajax({
-            url: '/makeLease',
+            url: '/makeReturn',
             type: 'GET',
             success: function (data) {
                 $('#btn_consult_return').html(data);
-            }})
+                $("#names_button").load("/getName");
+                $("#origin_city_button").load("/getOriginCity");
+                $("#next_submit").click(function () {
+                    var client_name = $('#names_button').val();
+                    var kmDriven = $('#kmDriven').val()
+                    if ((kmDriven == '')){
+                        alert("Please enter a kilometer value");
+                    }else{
+                        $.get('/makeReturnLease',
+                        {
+                            kmDriven: kmDriven,
+                            client_name: client_name
+                        }, function(data) {
+                            $('#result').html(data);
+                            $('#btn_return').click(function () {
+                                var destination_city = $('#origin_city_button').val();
+                                args = {
+                                    kmDriven: kmDriven,
+                                    client_name: client_name,
+                                    destination_city: destination_city,
+                                };
+                                $.post('/makeReturnLease', args, function(data) {
+                                    $('#result').html(data);
+                                });
+                            }
+                        )
+                    });
+                }
+            })
+        }})
     });
+
     //Button for consult leases
     $('#btn_consult_locations').click(function () {
         $.ajax({
@@ -85,7 +115,22 @@ $(document).ready(function () {
             type: 'GET',
             success: function (data) {
                 $('#btn_consult_locations_html').html(data);
-            }})
+                $('#search_submit').click( function() {
+                    var selectval = $('#parameter_type').val();
+                    var selectval2 = $('#search_text').val();
+                    if ($('#search_text').val().trim() == ''){
+                        alert("Please enter a value");
+                    }else{
+                        $.get('/consultLeasesByType',
+                        {
+                            parameter_type: selectval,
+                            parameter_value: selectval2
+                        }, function(data) {
+                            $('#result').html(data);
+                        });
+                    }
+                }
+            )}})
     });
     //Button for resume
     $('#btn_resume').click(function () {

@@ -1,20 +1,14 @@
-<!-- <!DOCTYPE html>
-<html>
+{% block main %}
 
-<head>
-    <title>Vehicle Rental System</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/static/js/script.js"></script>
-</head>
+<div>Select your name</div>
+<select class="select" id="names_button" name="names_button" style="width: 250px"></select><br><br>
 
-<body>
-    <h1>Vehicle Rental System</h1>
+<div>Select your destination city</div>
+<select class="select" id="origin_city_button" name="origin_city_button" style="width: 250px"></select><br><br>
 
-    <hr>
+<div>kilometers driven</div>
+<input type="number" min="1" oninput="validity.valid||(value='');" id="kmDriven" name="kmDriven" placeholder="Kilometers"> <br></br>
 
-    {% block main %}
-    {% endblock %}
+<input type="submit" id="next_submit" name="next_submit" value="Next" />
 
-</body>
-
-</html> -->
+{% endblock %}

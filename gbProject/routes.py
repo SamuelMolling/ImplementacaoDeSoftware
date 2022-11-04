@@ -104,13 +104,6 @@ def makeLocation():
         try:
             new_location = Location(id_client=client_name, id_origin_city=origin_city, id_destination_city=None, km_driven=None,days=days, id_vehicle=vehicle)
             db.session.add(new_location)
-            db.session.commit()
-        except Exception:
-            db.session.rollback()
-            return 'Error in the application, please try again later'
-        
-        try: 
-            #Update the vehicle status
             db.session.query(Vehicle).where(Vehicle.id == vehicle).update({Vehicle.available:False})
             db.session.commit()
         except Exception:
@@ -119,38 +112,85 @@ def makeLocation():
 
         return 'Location created successfully'
 
-# @app.route('/makeLease', methods=['GET'])
-# def getClient():
-#     client = []
-#     data = [(r.id, r.name) for r in client.query.all()]
+@app.route('/makeReturnLease', methods=['GET', 'POST'])
+def makeReturnLease():
 
-#     client.extend(f'<option value="{k}">{v}</option>' for k, v in data)
-#     return '\n'.join(client)
-    # return render_template('make_lease.html')
+    if request.method == 'GET':
 
-# @app.route('/getopthtml')
-# def get_opt_html():
-#     opt = list()
-#     data = [(r.id, r.option) for r in Option.query.all()]
+        client_name = int(request.args['client_name'])
+        kmDriven = int(request.args['kmDriven'])
+        #Get locations for client
+        active_location = Location.query.filter(Location.id_client == client_name, Location.id_destination_city.is_(None)).first()
+        if active_location is None:
+            return 'Client dont have location available'
 
-#     for k, v in data:
-#         opt.append(f'<option value="{k}">{v}</option>')
+        #Get vehicles available in the city
+        vehicles = Vehicle.query.filter(Vehicle.id == active_location.id_vehicle).first()
 
-#     return '\n'.join(opt)
+        value_day = active_location.days * vehicles.daily_value
+        value_km =  kmDriven * vehicles.km_value
+
+        value = value_day + value_km
+        value_formated = round(value,2)
+
+        return render_template('makeLocationReturn.html', vehicles=vehicles, value=value_formated, days=active_location.days)
+
+    elif request.method == 'POST':
+        #Get the vehicle id
+        client_name = int(request.form['client_name'])
+        kmDriven = int(request.form['kmDriven'])
+        destination_city = request.form['destination_city']
+
+        #get odometer
+        # location = Location.query.filter(Location.id_client == client_name, Location.id_destination_city.is_(None)).first()
+        location = Location.query.join(Vehicle).filter(Location.id_client == client_name, Location.id_destination_city.is_(None)).first()
+
+        odometer = Vehicle.odometer + kmDriven
+        
 
 
-# @app.route('/getoptjson')
-# def get_opt_json():
-#     opt = list()
-#     # data = [{r.id: r.option} for r in Option.query.all()]
-#     data = [(r.id, r.option) for r in Option.query.all()]
+        try:
+            #Update the location
+            db.session.query(Location).where(Location.id_client == client_name, Location.id_destination_city.is_(None)).update({Location.id_destination_city:destination_city, Location.km_driven:kmDriven})
+            db.session.query(Vehicle).where(Vehicle.id == location.id_vehicle).update({Vehicle.available:True, Vehicle.id_city:destination_city, Vehicle.odometer: odometer})
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            return 'Error in the application, please try again later'
+        
+        return 'Location returned successfully'
 
-#     return jsonify(data)
+@app.route('/consultLeasesByType', methods=['GET'])
+def consultLease():
+    parameter_type = request.args['parameter_type']
+    parameter_value = request.args['parameter_value']
 
-# @app.route('/download')
-# def download():
-#     content = 'Arquivo com conteúdo gerado dinamicamente em ' + dt.now().strftime('%Y-%m-%d %H:%M:%S')
-#     response = make_response(content)
-#     response.headers.set('Content-Type', 'text')
-#     response.headers.set('Content-Disposition', 'attachment', filename='dynfile.txt')
-#     return response
+    #Validate the parameter
+    if parameter_value == '':
+        return 'Parameter is null, please enter a valid value'
+
+    if parameter_type == 'Name':
+        locations = Location.query.join(Client).filter(func.lower(Client.name) == func.lower(parameter_value)).all()
+    elif parameter_type == 'Model':
+        locations = Location.query.join(Vehicle).filter(func.lower(Vehicle.model) == func.lower(parameter_value)).all()
+
+    if len(locations) == 0:
+        return 'Nothing found'
+
+    #Total Value
+    total_value = []
+    for location in locations:
+        value_day = location.days * location.vehicle.daily_value
+        value_km =  location.km_driven * location.vehicle.km_value
+        value = value_day + value_km
+        total_value.append(round(value,2))
+
+    return render_template('table_location.html', locations=locations, total_value=total_value)
+
+@app.route('/download')
+def download():
+    content = 'Arquivo com conteúdo gerado dinamicamente em ' + dt.now().strftime('%Y-%m-%d %H:%M:%S')
+    response = make_response(content)
+    response.headers.set('Content-Type', 'text')
+    response.headers.set('Content-Disposition', 'attachment', filename='consultLease.md')
+    return response

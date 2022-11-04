@@ -1,0 +1,39 @@
+{% block main %}
+
+<div id="table_export">
+    <table border="1">
+        <tr>
+            <th>Cliente</th>
+            <th>Car Model</th>
+            <th>Car Color</th>
+            <th>Car Year</th>
+            <th>Car Odometer (KM)</th>
+            <th>Origin City</th>
+            <th>Destination City</th>
+            <th>Driven (KM)</th>
+            <th>Days</th>
+            <th>Total Price</th>
+        </tr>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.client.name }}</td>
+            <td>{{ location.vehicle.model }}</td>
+            <td>{{ location.vehicle.color }}</td>
+            <td>{{ location.vehicle.year }}</td>
+            <td>{{ location.vehicle.odometer }}</td>
+            <td>{{ location.origin_city.name }}</td>
+            <td>{{ location.destination_city.name }}</td>
+            <td>{{ location.km_driven }}</td>
+            <td>{{ location.days }}</td>
+            <td>{{ total_value[loop.index0] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br></br>
+<h2>Download file</h2>
+<hr>
+<p>Click to <a href="/download">download</a> a markdown file</p>
+
+{% endblock %}
