@@ -1,9 +1,6 @@
 # Arquivo routes.py
-from crypt import methods
-import markdownify
 from app import app
-from datetime import datetime as dt
-from flask import render_template, make_response, jsonify, request
+from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from models import *
 from sqlalchemy import func

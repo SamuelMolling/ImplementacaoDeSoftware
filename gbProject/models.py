@@ -1,4 +1,3 @@
-from unicodedata import name
 from app import db, app
 import csv
 
