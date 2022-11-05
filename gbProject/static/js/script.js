@@ -1,8 +1,17 @@
 $(document).ready(function () {
-    
+
+    function closeButton(button) {
+        var divs = document.getElementsByTagName('div')
+        for (var i = 0; i < divs.length; i++) {
+            if (divs[i].id != button && divs[i].id!='result')
+                $(divs[i]).hide()
+                $(button).show()
+        }
+    }
 
     //Button for consult vehicles
     $('#btn_consult_vehcicles').click(function () {
+        closeButton('#btn_consult_vehcicles_by_model')
         $.ajax({
             url: '/consultVehcicle',
             type: 'GET',
@@ -28,6 +37,7 @@ $(document).ready(function () {
 
     //Button for make lease
     $('#btn_make_lease').click(function () {
+        closeButton('#btn_consult_lease')
         $.ajax({
             url: '/makeLease',
             type: 'GET',
@@ -72,6 +82,7 @@ $(document).ready(function () {
     
     //Button for make return
     $('#btn_make_return').click(function () {
+        closeButton('#btn_consult_return')
         $.ajax({
             url: '/makeReturn',
             type: 'GET',
@@ -111,6 +122,7 @@ $(document).ready(function () {
 
     //Button for consult leases
     $('#btn_consult_locations').click(function () {
+        closeButton('#btn_consult_locations_html')
         $.ajax({
             url: '/consultLeases',
             type: 'GET',
