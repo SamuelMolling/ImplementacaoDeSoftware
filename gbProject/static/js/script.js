@@ -88,10 +88,10 @@ $(document).ready(function () {
             type: 'GET',
             success: function (data) {
                 $('#btn_consult_return').html(data);
-                $("#names_button").load("/getName");
-                $("#origin_city_button").load("/getOriginCity");
+                $("#names_button_return").load("/getName");
+                $("#origin_city_button_return").load("/getOriginCity");
                 $("#next_submit").click(function () {
-                    var client_name = $('#names_button').val();
+                    var client_name = $('#names_button_return').val();
                     var kmDriven = $('#kmDriven').val()
                     if ((kmDriven == '')){
                         alert("Please enter a kilometer value");
@@ -103,7 +103,7 @@ $(document).ready(function () {
                         }, function(data) {
                             $('#result').html(data);
                             $('#btn_return').click(function () {
-                                var destination_city = $('#origin_city_button').val();
+                                var destination_city = $('#origin_city_button_return').val();
                                 args = {
                                     kmDriven: kmDriven,
                                     client_name: client_name,
@@ -165,18 +165,3 @@ $(document).ready(function () {
             }})
     });
 });
-
-    // $('#search_submit').click(function () {
-    //     var selectval = $('#parameter_type').val();
-    //     var value = $('#search_text').val();
-    //     $.ajax({
-    //         url: '/getVehicles',
-    //         type: 'GET',
-    //         data: {
-    //             parameter_type: selectval,
-    //             parameter_value: value
-    //         },
-    //         success: function (data) {
-    //            alert(data);
-    //         }});
-    // })

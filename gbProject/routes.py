@@ -55,8 +55,6 @@ def resume():
 
     return render_template('resume.html', locations=locations, total_value=total_value, total_days=days, total_km=km_driven, total_value_by_km=value_km, total_daily_value=value_day)
 
-
-#Routes for consults
 @app.route('/getVehicles', methods=['GET'])
 def getVehicles():
     parameter_type = request.args['parameter_type']
@@ -74,10 +72,9 @@ def getVehicles():
         vehicles = Vehicle.query.filter(func.lower(Vehicle.model) == func.lower(parameter_value)).all()
     
     if len(vehicles) == 0:
-        return 'No vehicles found in this city'
+        return 'No vehicles found'
     
     return render_template('table_vehicle.html', vehicles=vehicles)
-
 
 @app.route('/getName', methods=['GET'])
 def getName():
@@ -202,8 +199,14 @@ def consultLease():
     total_value = []
     for location in locations:
         value_day = location.days * location.vehicle.daily_value
-        value_km =  location.km_driven * location.vehicle.km_value
-        value = value_day + value_km
-        total_value.append(round(value,2))
+
+        if location.km_driven is not None:
+            value_km =  location.km_driven * location.vehicle.km_value
+            value = value_day + value_km
+            total_value.append(round(value,2))
+        else:
+            location.km_driven = ""
+            value_km = ""
+            total_value.append("")
 
     return render_template('table_location.html', locations=locations, total_value=total_value)
