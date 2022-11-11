@@ -1,6 +1,6 @@
 /* Path: static/css/style.css */
 body {
-    background-image: url("https://conteudo.imguol.com.br/c/carros/blogs/2d/2019/02/06/venda-de-veiculos-novos-sobe-1273-em-janeiro-aponta-fenabrave-1549470716575_v2_900x506.jpg.webp");
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdJFOykVjwWY4Fq2MfIcKg7ElPFEyQICjlFg&usqp=CAU");
     background-color: #fff;
     color: #000;
     background-size: cover;
@@ -14,6 +14,14 @@ body {
     text-align: left  ;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    font-size: 3.0rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
 }
 
 /* Table style */
